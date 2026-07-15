@@ -5,6 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * データベース全体のテストデータを順番に投入するメインシーダークラス
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        //依存関係を考慮した実行順
+        $this->call([
+            UserSeeder::class,
+            GenreSeeder::class,
+            BookSeeder::class,
+            ReviewSeeder::class,
+            FavoriteSeeder::class,
+            ReviewLikeSeeder::class,
+        ]);
     }
 }

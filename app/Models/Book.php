@@ -18,7 +18,8 @@ class Book extends Model
         'author',
         'description',
         'isbn',
-    ]
+        'published_at',
+    ];
     /**
      * この書籍を登録したユーザー（1対1)
      */
