@@ -16,7 +16,7 @@ class Review extends Model
         'comment',
         'rating',
 
-    ]
+    ];
 
     /**
      * レビュー対象の書籍(1対1)
@@ -39,7 +39,7 @@ class Review extends Model
      */
     public function likedUsers():belongsToMany
     {
-        return $this->belongsYoMany(User::class);
+        return $this->belongsToMany(User::class,'like_review');
     }
 
 }

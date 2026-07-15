@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title')->unique()->comment('書籍タイトル');
             $table->string('author')->comment('著者名');
             $table->text('description',1000)->comment('書籍説明');
+            $table->string('image_url')->nullable()->comment('画像URL');
+            $table->date('published_at')->comment('出版日');
             $table->string('isbn',13)->nullable()->unique()->comment('ISBN番号');
             $table->timestamps();
         });
