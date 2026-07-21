@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Requests\Book;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreBookRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title' => ['required','string','max:255'],
+            'author' => ['required','string','max:255'],
+            'isbn' => ['nullable','string','size:13','unique:books,isbn'],
+            'published_date' => ['date'],
+            'genres' => ['required','array'],
+            'genres.*' => ['exists:genres,id'],//画面で選択されたジャンルが配列で送られてくるから中身を取り出して、genresテーブルのidカラムに本当にあるか確認してる
+            'image_url' => ['nullable','url'],
+
+        ];
+    }
+
+    public function messages():array
+    {
+        return[
+        'title.required' => 'タイトルを入力して下さい',
+        'title.max' => 'タイトルは255文字以内で入力して下さい',
+        'author.required' => '著者名を入力して下さい',
+        'author.max' => '著者名は255文字以下で入力して下さい',
+        'isbn.size'=> 'ISBNは13桁で入力して下さい',
+        'isbn.unique' => 'このISBNはすでに登録されています',
+        'published_date.date' => '有効な日付を入力して下さい',
+        'genres.required' => 'ジャンルを選択して下さい',
+        'genres.*.exists' => '選択されたジャンルが正しくありません',
+        'image_url.url' => 'URL形式で入力して下さい',
+        ];
+
+    }
+
+
+}

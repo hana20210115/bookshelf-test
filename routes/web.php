@@ -21,8 +21,9 @@ Route::get('/books/{book}',[BookController::class,'show'])->name('books.show');
 
 //ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function()
-{   
+{
     //書籍登録画面の表示
     Route::get('/books/create',[BookController::class,'create'])->name('books.create');
+
 });
 
