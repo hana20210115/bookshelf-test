@@ -6,6 +6,8 @@ use App\Services\BookService;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Models\Book;
+use App\Http\Requests\Book\UpdateBookRequest;
+use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
 {   
@@ -40,13 +42,70 @@ class BookController extends Controller
     }
 
     /**
-     * 書籍詳細を表示する(仮)
+     * 書籍詳細を表示する
      *
      */
-    public function show(Book $book){
+    public function show(Book $book)
+    {
 
-    $book->load(['genres','reviews.user','reviews.likedByUsers']);
+    $book = $this->bookService->getBookDetails($book);
 
     return view('books.show',compact('book'));
     }
+
+    /**
+     * 書籍の編集画面へ遷移する
+     * @param Book $book
+     */
+    public function edit(Book $book):view
+    {
+        $this->authorize('update',$book);
+
+
+        $date = $this->bookService->getEditDate($book);
+
+
+
+        return view('books.edit',$date);//getEditDateの中で配列に変えてるので、compact関数は使わない
+    }
+
+    /**
+     *
+     * 書籍の更新処理
+     * @param UpdateBookRequest
+     * @param Book $book
+     * @return RedirectResponse
+     * 
+     */
+    public function update(UpdateBookRequest $request,Book $book):RedirectResponse
+    {   //認可チェック
+        $this->authorize('update',$book);
+
+        //UpdateBookRequestのチェックを通過したデータのみ配列として取得
+        $this->bookService->updateBook($book,$request->validated());
+
+        //更新完了後、書籍の詳細画面へリダイレクト
+        return redirect()->route('books.show',$book)->with('success','書籍の情報を更新しました');
+
+    }
+
+    /**
+     * 書籍の削除処理
+     * ※単純なロジックなのでサービスはクラスは使いません
+     * @param Book $book
+     * @return RedirectResponse
+     */
+    public function destroy(Book $book):RedirectResponse
+    {
+        //認可チェック
+        $this->authorize('delete',$book);
+
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success','書籍を削除しました');
+
+        
+    }
+
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreReviewRequest extends FormRequest
+class UpdateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreReviewRequest extends FormRequest
         
         return [
             'rating' => ['required','integer','min:1','max:5'],//星の数の下限上限、基本的には1〜５の間でしか入力で着ないが悪意のあるユーザー対策で一応定めている
-            'comment' => ['nullable','string','max:1000'],
+            'comment' => ['required','string','max:1000'],
         ];
     }
 
@@ -32,7 +32,8 @@ class StoreReviewRequest extends FormRequest
     {
         return[
             'rating.required' => '評価を入力してください',
-            'comment.max:1000' => 'コメントは1000文字以下で入力してください',
+            'comment.required' => 'コメントを入力してください',
+            'comment.max' => 'コメントは1000文字以下で入力してください',
         ];
         
     }

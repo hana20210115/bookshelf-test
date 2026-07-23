@@ -41,7 +41,7 @@ class StoreBookApiRequest extends FormRequest
             'author.required' => '著者を入力してください',
             'author.max' => '著者は255文字以内で入力してください',
             'isbn.size' => 'ISBNは13文字で入力してください',
-            'isbn.unique' => 'このISBNはすでに登録されています',
+            'isbn.unique' => '有効なISBNを入力してください',
             'published_date.date' => '有効な日付を入力してください',
             'image_url.url' => '正しいURL形式で入力してください',
             'genres.required' => 'ジャンルを選択してください',

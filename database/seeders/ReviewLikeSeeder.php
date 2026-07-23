@@ -30,8 +30,8 @@ class ReviewLikeSeeder extends Seeder
                 
                 $likerIds = $potentialLikers->random(min($likeCount, $potentialLikers->count()))->pluck('id')->toArray();
 
-                // Reviewモデルのリレーション(likedUsers)を使用してsync
-                $review->likedUsers()->syncWithoutDetaching($likerIds);
+                // Reviewモデルのリレーション(liked ByUsers)を使用してsync
+                $review->likedByUsers()->syncWithoutDetaching($likerIds);
             }
         }
     }
