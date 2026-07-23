@@ -40,16 +40,16 @@ class UpdateBookRequest extends FormRequest
     public function massages():array
     {
         return[
-            'title.required' => 'タイトルを入力して下さい',
-            'title.max' => 'タイトルは255文字以内で入力して下さい',
-            'author,required' => '著者名を入力して下さい',
+            'title.required' => 'タイトルを入力してください',
+            'title.max' => 'タイトルは255文字以内で入力してください',
+            'author,required' => '著者名を入力してください',
             'author.max' => '著者名は255文字で入力して下さい',
-            'isbn.size'=> 'ISBNは13桁で入力して下さい',
-            'isbn.unique' => 'このISBNはすでに登録されています'
-            'published_date.date' => '有効な日付を入力して下さい',
-            'genres.required' => 'ジャンルを選択して下さい',
+            'isbn.size'=> 'ISBNは13桁で入力してください',
+            'isbn.unique' => 'このISBNはすでに登録されています',
+            'published_date.date' => '有効な日付を入力してください',
+            'genres.required' => 'ジャンルを選択してください',
             'genres.*.exists' => '選択されたジャンルが正しくありません',
-            'image_url.url' => 'URL形式で入力して下さい',
+            'image_url.url' => 'URL形式で入力してください',
         ];
 
     }

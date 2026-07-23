@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -53,5 +54,51 @@ class BookService
         }
         */
         return $query->paginate(10)->withQueryString();
+    }
+
+    /**
+     * 書籍詳細画面に必要なデータをロードして返す
+     * 
+     * @param Book $book
+     * @return Book
+     */
+    public function getBookDetails(Book $book):Book
+    {
+        $book->load([
+            'genres',
+            'reviews.user',
+        ]);
+
+        $book->loadCount('favorites');
+
+        return $book;
+    }
+
+    /**
+     * 編集画面に必要なデータを取得する
+     */
+    public function getEditDate(Book $book):array
+    {
+        return [
+            'book' => $book,
+            'genres' => Genre::all(),
+            'bookGenreIds' => $book->genres->pluck('id')->toArray(),
+        ];
+    }
+
+    /**
+     * 書籍の更新処理
+     */
+    public function updateBook(Book $book,array $data):Book
+    {   //booksテーブルを更新
+        $book->update($data);
+
+        //書籍とジャンルの中間テーブルのbook_genreテーブルを更新
+        if (isset($data['genres'])){
+            $book->genres()->sync($data['genres']);
+        }
+
+        return $book;
+
     }
 }

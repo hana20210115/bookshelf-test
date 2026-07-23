@@ -25,7 +25,7 @@ class StoreBookRequest extends FormRequest
             'title' => ['required','string','max:255'],
             'author' => ['required','string','max:255'],
             'isbn' => ['nullable','string','size:13','unique:books,isbn'],
-            'published_date' => ['date'],
+            'published_date' => ['nullable','date'],
             'genres' => ['required','array'],
             'genres.*' => ['exists:genres,id'],//画面で選択されたジャンルが配列で送られてくるから中身を取り出して、genresテーブルのidカラムに本当にあるか確認してる
             'image_url' => ['nullable','url'],
@@ -36,16 +36,16 @@ class StoreBookRequest extends FormRequest
     public function messages():array
     {
         return[
-        'title.required' => 'タイトルを入力して下さい',
-        'title.max' => 'タイトルは255文字以内で入力して下さい',
-        'author.required' => '著者名を入力して下さい',
-        'author.max' => '著者名は255文字以下で入力して下さい',
-        'isbn.size'=> 'ISBNは13桁で入力して下さい',
-        'isbn.unique' => 'このISBNはすでに登録されています',
-        'published_date.date' => '有効な日付を入力して下さい',
-        'genres.required' => 'ジャンルを選択して下さい',
+        'title.required' => 'タイトルを入力してください',
+        'title.max' => 'タイトルは255文字以内で入力してください',
+        'author.required' => '著者名を入力してください',
+        'author.max' => '著者名は255文字以下で入力してください',
+        'isbn.size'=> 'ISBNは13桁で入力してください',
+        'isbn.unique' => '有効なISBNを入力してください',
+        'published_date.date' => '有効な日付を入力してください',
+        'genres.required' => 'ジャンルを選択してください',
         'genres.*.exists' => '選択されたジャンルが正しくありません',
-        'image_url.url' => 'URL形式で入力して下さい',
+        'image_url.url' => 'URL形式で入力してください',
         ];
 
     }

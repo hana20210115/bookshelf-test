@@ -24,7 +24,7 @@ class StoreReviewRequest extends FormRequest
         
         return [
             'rating' => ['required','integer','min:1','max:5'],//星の数の下限上限
-            'comment' => ['nullable','string','max'],
+            'comment' => ['required','string','max:1000'],
         ];
     }
 
@@ -32,7 +32,8 @@ class StoreReviewRequest extends FormRequest
     {
         return[
             'rating.required' => '評価を入力してください',
-            'comment.max:1000' => 'コメントは1000文字以下で入力してください',
+            'comment.required' => 'コメントを入力してください',
+            'comment.max' => 'コメントは1000文字以下で入力してください',
         ];
         
     }

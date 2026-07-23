@@ -18,7 +18,7 @@ class Book extends Model
         'author',
         'description',
         'isbn',
-        'published_at',
+        'published_date',
     ];
     /**
      * この書籍を登録したユーザー（1対1)
@@ -34,7 +34,7 @@ class Book extends Model
      */
     public function genres():BelongsToMany
     {
-        return $this->belongsToMany(genre::class);
+        return $this->belongsToMany(Genre::class);
     }
 
     /**
@@ -51,7 +51,7 @@ class Book extends Model
 
     public function favorites():BelongsToMany
     {
-        return $this->belongsTo(Favorite::class);
+        return $this->belongsToMany(user::class,'favorites');
     }
     
 }

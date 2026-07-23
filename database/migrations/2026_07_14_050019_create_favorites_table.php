@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('book_id')->constrained();
+            $table->foreignId('book_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
 
             //複合ユニーク:１ユーザーにつき１冊1レビュー
