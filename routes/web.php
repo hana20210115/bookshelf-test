@@ -54,6 +54,14 @@ Route::middleware('auth')->group(function()
     //自分の書籍を削除する
     Route::delete('/books/{book}/delete',[BookController::class,'destroy'])->name('books.destroy');
 
+    //ランキング画面の表示
+    Route::get('/ranking',[RankingController::class,'index'])->name('ranking.index');
+
+    //お気に入りの一覧画面の表示
+    Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.index');
+
+    //ジャンル管理画面の表示
+    Route::get('/genres',[GenreController::class,'index'])->name('genres.index');
 
 
 });

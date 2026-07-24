@@ -38,12 +38,12 @@ class UpdateBookRequest extends FormRequest
         ];
     }
 
-    public function massages():array
+    public function messages():array
     {
         return[
             'title.required' => 'タイトルを入力してください',
             'title.max' => 'タイトルは255文字以内で入力してください',
-            'author,required' => '著者名を入力してください',
+            'author.required' => '著者名を入力してください',
             'author.max' => '著者名は255文字で入力して下さい',
             'isbn.size'=> 'ISBNは13桁で入力してください',
             'isbn.unique' => 'このISBNはすでに登録されています',

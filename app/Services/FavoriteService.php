@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Book;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FavoriteService
 {
@@ -19,4 +20,13 @@ class FavoriteService
         $book->favorites()->toggle($user->id);
     }
 
+    /**
+     * ユーザーのお気に入り書籍をページネーションで取得する
+     * @param User $user
+     * @return LengthAwarePaginator
+     */
+    public function getFavoriteBooks(User $user):LengthAwarePaginator
+    {
+        return $user->favoriteBooks()->orderBy('favorites.created_at','desc')->paginate(10);
+    }
 }
