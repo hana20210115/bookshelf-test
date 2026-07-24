@@ -19,6 +19,7 @@ class Book extends Model
         'description',
         'isbn',
         'published_date',
+        'image_url',
     ];
     /**
      * この書籍を登録したユーザー（1対1)
