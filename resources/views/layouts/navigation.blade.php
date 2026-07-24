@@ -16,26 +16,24 @@
                         {{ __('書籍一覧') }}
                     </x-nav-link>
                     
-                    {{-- ランキング機能は一時的に隠す --}}
-                    {{-- 
+                    
                     <x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.index')">
                         {{ __('ランキング') }}
                     </x-nav-link>
-                    --}}
+                    
 
                     <x-nav-link :href="route('books.create')" :active="request()->routeIs('books.create')">
                         {{ __('書籍登録') }}
                     </x-nav-link>
 
-                    {{-- お気に入り・ジャンル管理も一時的に隠す --}}
-                    {{-- 
+                    
                     <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
                         {{ __('お気に入り') }}
                     </x-nav-link>
                     <x-nav-link :href="route('genres.index')" :active="request()->routeIs('genres.*')">
                         {{ __('ジャンル管理') }}
                     </x-nav-link>
-                    --}}
+                    
                 </div>
             </div>
             
@@ -92,24 +90,24 @@
                 {{ __('書籍一覧') }}
             </x-responsive-nav-link>
             
-            {{-- 
+            
             <x-responsive-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.index')">
                 {{ __('ランキング') }}
             </x-responsive-nav-link>
-            --}}
+            
 
             <x-responsive-nav-link :href="route('books.create')" :active="request()->routeIs('books.create')">
                 {{ __('書籍登録') }}
             </x-responsive-nav-link>
 
-            {{-- 
+            
             <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
                 {{ __('お気に入り') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('genres.index')" :active="request()->routeIs('genres.*')">
                 {{ __('ジャンル管理') }}
             </x-responsive-nav-link>
-            --}}
+            
         </div>
 
         <!-- Responsive Settings Options -->

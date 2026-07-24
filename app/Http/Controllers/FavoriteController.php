@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use Illuminate\Http\RedirectResponse;
 use App\Services\FavoriteService;
+use Illuminate\view\View;
 
 class FavoriteController extends Controller
 {
@@ -18,6 +19,8 @@ class FavoriteController extends Controller
 
     /**
      * お気に入りの追加/解除アクション
+     * @param Book $book
+     * @return RedirectResponse
      */
     public function toggle(Book $book):RedirectResponse
     {
@@ -27,4 +30,19 @@ class FavoriteController extends Controller
 
         return back();
     }
+
+    /**
+     * お気にいに追加した書籍の一覧画面の表示
+     *　@return View
+     */
+    public function index():View
+    {
+        $user = auth()->user();
+
+        //サービスに$userがお気に入りに登録している書籍を取って来させる
+        $books = $this->favoriteService->getFavoriteBooks($user);
+
+        return view('favorites.index',compact('books'));
+        
+        }
 }
