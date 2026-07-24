@@ -8,6 +8,10 @@ use Illuminate\Contracts\View\View;
 use App\Models\Book;
 use App\Http\Requests\Book\UpdateBookRequest;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Genre;
+use App\Http\Requests\Book\StoreBookRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller
 {   
@@ -27,8 +31,8 @@ class BookController extends Controller
     }
 
     /**
-     * 書籍一覧を表示するメソッド
-     * 
+     * 書籍一覧を表示する
+     *
      * @param Request $request
      * @return view
      */
@@ -51,6 +55,36 @@ class BookController extends Controller
     $book = $this->bookService->getBookDetails($book);
 
     return view('books.show',compact('book'));
+    }
+    
+    /**
+     * 書籍登録画面の表示
+     * @return View
+     */
+    public function create():View
+    {
+        //ジャンルを選択できるようにジャンルを全て取得する
+        $genres = Genre::all();
+
+        return view('books.create',compact('genres'));
+    }
+
+    /**
+     * 書籍の登録処理
+     * @param StoreBookRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreBookRequest $request):RedirectResponse
+    {   
+        
+
+        //サービスにバリデーション済みのデータを渡して保存処理をさせる
+        $this->bookService->storeBook($request->validated(),Auth::id());
+
+        //書籍登録画面へリダイレクト
+        return redirect()->route('books.create')->with('success','新しい書籍を登録しました');
+
+
     }
 
     /**

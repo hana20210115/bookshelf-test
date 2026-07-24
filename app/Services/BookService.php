@@ -74,6 +74,41 @@ class BookService
         return $book;
     }
 
+    
+
+    /**
+     * 書籍の新規登録
+     * @param array $validateDate
+     * @param int $userId
+     * @return Book
+     */
+    public function storeBook(array $validatedData,int $userId, ):Book
+    {   
+        //バリデーションデータからジャンルのIDを取る
+        $genreId = $validatedData['genres'];
+
+        //書籍の保存には不要なジャンルを切り離す
+        unset($validatedData['genres']);
+
+        //このままだと、$validatedDataの中にはuser_idがないので追加する
+        $validatedData['user_id'] = $userId;
+        
+        
+        //データベスに保存
+        $book = Book::create($validatedData);
+
+        //中間テーブルに紐付け
+        $book->genres()->sync($genreId);
+
+        return $book;
+
+
+
+
+
+
+    }
+
     /**
      * 編集画面に必要なデータを取得する
      */
