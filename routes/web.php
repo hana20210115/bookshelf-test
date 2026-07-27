@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\RankingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,15 @@ use App\Http\Controllers\GenreController;
 
 //トップページ(書籍一覧)
 Route::get('/books',[BookController::class,'index'])->name('books.index');
+
+//書籍詳細画面の表示
+Route::get('/books/{book}',[BookController::class,'show'])->name('books.show');
+
+//ログアウト後のリダイレクト先
+Route::redirect('/', '/books');
+
+//ランキング画面の表示（ゲストにも表示可）
+Route::get('/ranking',[RankingController::class,'index'])->name('ranking.index');
 
 //ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function()
@@ -85,9 +95,4 @@ Route::middleware('auth')->group(function()
 
 });
 
-//書籍詳細画面の表示
-Route::get('/books/{book}',[BookController::class,'show'])->name('books.show');
-
-//ログアウト後のリダイレクト先
-Route::redirect('/', '/books');
 
