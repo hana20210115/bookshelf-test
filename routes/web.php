@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\GenreController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,9 +64,30 @@ Route::middleware('auth')->group(function()
     //ジャンル管理画面の表示
     Route::get('/genres',[GenreController::class,'index'])->name('genres.index');
 
+    //ジャンル登録画面へ遷移する
+    Route::get('/genres/create',[GenreController::class,'create'])->name('genres.create');
+    //ジャンル登録処理
+    Route::post('/genres',[GenreController::class,'store'])->name('genres.store');
+
+    //ジャンル詳細画面へ遷移する
+    Route::get('/genres/{genre}',[GenreController::class,'show'])->name('genres.show');
+
+    //ジャンル編集画面へ遷移
+    Route::get('/genre/{genre}/edit',[GenreController::class,'edit'])->name('genres.edit');
+    //ジャンル編集処理
+    Route::put('/genres/{genre}',[GenreController::class,'update'])->name('genres.update');
+
+    //ジャンルの削除処理
+    Route::delete('/genres/{genre}',[GenreController::class,'destroy'])->name('genres.destroy');
+
+
+
 
 });
 
 //書籍詳細画面の表示
 Route::get('/books/{book}',[BookController::class,'show'])->name('books.show');
+
+//ログアウト後のリダイレクト先
+Route::redirect('/', '/books');
 
