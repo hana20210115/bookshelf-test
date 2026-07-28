@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Review\StoreReviewRequest;
+use App\Http\Requests\Review\UpdateReviewRequest;
 use App\Models\Book;
 use App\Models\Review;
 use App\Services\ReviewService;
-use App\Http\Requests\Review\StoreReviewRequest;
-use App\Http\Requests\Review\UpdateReviewRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-
 class ReviewController extends Controller
 {
-    
     private $reviewService;
 
     /**
      * コンストラクタ
-     *
-     * @param ReviewService $reviewService
      */
     public function __construct(ReviewService $reviewService)
     {
@@ -31,8 +27,6 @@ class ReviewController extends Controller
      * レビューの新規投稿処理
      *
      * @param StoreReviewRequest
-     * @param Book $book
-     * @return RedirectResponse
      */
     public function store(StoreReviewRequest $request, Book $book): RedirectResponse
     {
@@ -43,9 +37,6 @@ class ReviewController extends Controller
 
     /**
      * レビュー編集画面の表示
-     *
-     * @param Review $review
-     * @return View
      */
     public function edit(Review $review): View
     {
@@ -56,10 +47,6 @@ class ReviewController extends Controller
 
     /**
      * レビューの更新処理
-     *
-     * @param UpdateReviewRequest $request
-     * @param Review $review
-     * @return RedirectResponse
      */
     public function update(UpdateReviewRequest $request, Review $review): RedirectResponse
     {
@@ -72,9 +59,6 @@ class ReviewController extends Controller
 
     /**
      * レビューの削除処理
-     *
-     * @param Review $review
-     * @return RedirectResponse
      */
     public function destroy(Review $review): RedirectResponse
     {
@@ -87,9 +71,6 @@ class ReviewController extends Controller
 
     /**
      * レビューの「いいね」処理（追加・解除のトグル）
-     *
-     * @param Review $review
-     * @return RedirectResponse
      */
     public function like(Review $review): RedirectResponse
     {

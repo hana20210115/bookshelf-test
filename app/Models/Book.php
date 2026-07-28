@@ -21,19 +21,19 @@ class Book extends Model
         'published_date',
         'image_url',
     ];
+
     /**
      * この書籍を登録したユーザー（1対1)
      */
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-
     /**
      * この書籍に紐づくジャンル（多対多）
      */
-    public function genres():BelongsToMany
+    public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class);
     }
@@ -49,10 +49,8 @@ class Book extends Model
     /**
      * この書籍をお気に入り登録しているユーザー（多対多）
      */
-
-    public function favorites():BelongsToMany
+    public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(user::class,'favorites');
+        return $this->belongsToMany(user::class, 'favorites');
     }
-    
 }

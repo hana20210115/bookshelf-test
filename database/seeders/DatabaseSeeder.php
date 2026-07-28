@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //依存関係を考慮した実行順
+        // 依存関係を考慮した実行順
         $this->call([
             UserSeeder::class,
             GenreSeeder::class,

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\RankingService;
 use Illuminate\View\View;
 
@@ -17,13 +16,13 @@ class RankingController extends Controller
 
     /**
      * ランキング画面を表示
+     *
      * @return View;
      */
-    public function index():View
+    public function index(): View
     {
         $rankedBooks = $this->rankingService->getTopRatedBooks();
 
-        return view('ranking.index',compact('rankedBooks'));
+        return view('ranking.index', compact('rankedBooks'));
     }
-
 }

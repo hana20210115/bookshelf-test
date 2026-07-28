@@ -4,15 +4,14 @@ namespace App\Policies;
 
 use App\Models\Book;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class BookPolicy
 {
     /**
      * ユーザーが本を編集できるかの判定
      */
-    public function update(User $user,Book $book): bool
-    {   //ログインユーザーと本に紐づいているUser_idが同じならtrue、違ったらfalse
+    public function update(User $user, Book $book): bool
+    {   // ログインユーザーと本に紐づいているUser_idが同じならtrue、違ったらfalse
         return $user->id === $book->user_id;
     }
 
@@ -23,10 +22,4 @@ class BookPolicy
     {
         return $user->id === $book->user_id;
     }
-
-    
-
-    
-
-    
 }

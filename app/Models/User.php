@@ -4,11 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -48,7 +48,7 @@ class User extends Authenticatable
     /**
      * ユーザーが登録した書籍(1対多)
      */
-    public function books():HasMany
+    public function books(): HasMany
     {
         return $this->hasMany(Book::class);
     }
@@ -56,7 +56,7 @@ class User extends Authenticatable
     /**
      * ユーザーが投稿したレビュー(1対多)
      */
-    public function reviews():HasMany
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }

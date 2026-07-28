@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
 
-            //複合ユニーク:１ユーザーにつき１冊1レビュー
-            $table->unique(['book_id','user_id']);
+            // 複合ユニーク:１ユーザーにつき１冊1レビュー
+            $table->unique(['book_id', 'user_id']);
         });
     }
 

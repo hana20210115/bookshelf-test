@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
-            $table->text('comment',1000)->comment('コメント本文');
+            $table->text('comment', 1000)->comment('コメント本文');
             $table->unsignedTinyInteger('rating')->comment('評価1〜5');
             $table->timestamps();
 
-            //複合ユニーク：１ユーザー1レビューのみ可能
-            $table->unique(['user_id','book_id']);
+            // 複合ユニーク：１ユーザー1レビューのみ可能
+            $table->unique(['user_id', 'book_id']);
 
         });
     }

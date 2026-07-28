@@ -17,7 +17,7 @@ class Genre extends Model
     /**
      * このジャンルに紐づく書籍（多対多）
      */
-    public function books():BelongsToMany
+    public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class);
     }
