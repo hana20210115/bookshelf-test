@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class Review extends Model
 {
     use HasFactory;
@@ -21,7 +22,7 @@ class Review extends Model
     /**
      * レビュー対象の書籍(1対1)
      */
-    public function book():BelongsTo
+    public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class);
     }
@@ -29,7 +30,7 @@ class Review extends Model
     /**
      * レビューを投稿したユーザー(1対1)
      */
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -37,9 +38,8 @@ class Review extends Model
     /**
      * このレビューにいいねしたユーザー(多対多)
      */
-    public function likedByUsers():belongsToMany
+    public function likedByUsers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class,'like_review');
+        return $this->belongsToMany(User::class, 'like_review');
     }
-
 }

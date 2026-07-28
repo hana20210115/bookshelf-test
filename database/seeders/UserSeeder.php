@@ -6,32 +6,30 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-    /**
-     * ユーザーのテストデータを投入するシーダークラス
-     */
+/**
+ * ユーザーのテストデータを投入するシーダークラス
+ */
 class UserSeeder extends Seeder
 {
     /**
      * データベースへのデータを投入する
-     * 
-     * @return void
      */
     public function run(): void
     {
         $users = [
-            ['name' => '山田太郎','email' => 'yamada@example.com'],
-            ['name' => '鈴木花子','email' => 'suzuki@example.com'],
-            ['name' => '田中一郎','email' => 'tanaka@example.com'],
-            ['name' => '佐藤美咲','email' => 'sato@example.com'],
-            ['name' => '高橋健太','email' => 'takahashi@example.com'],
+            ['name' => '山田太郎', 'email' => 'yamada@example.com'],
+            ['name' => '鈴木花子', 'email' => 'suzuki@example.com'],
+            ['name' => '田中一郎', 'email' => 'tanaka@example.com'],
+            ['name' => '佐藤美咲', 'email' => 'sato@example.com'],
+            ['name' => '高橋健太', 'email' => 'takahashi@example.com'],
         ];
-        //firstOrCreateメソッドで同じユーザーが作られないようにしている
-        foreach ($users as $user){
+        // firstOrCreateメソッドで同じユーザーが作られないようにしている
+        foreach ($users as $user) {
             User::firstOrCreate(
                 ['email' => $user['email']],
                 [
-                    'name'=>$user['name'],
-                    'password'=>Hash::make('password'),
+                    'name' => $user['name'],
+                    'password' => Hash::make('password'),
                 ]
             );
         }

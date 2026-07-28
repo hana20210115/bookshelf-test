@@ -32,7 +32,7 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
-        ],[
+        ], [
             'name.required' => '名前を入力してください',
             'email.required' => 'メールアドレスを入力したください',
             'email.unique' => '有効なメールアドレスを

@@ -1,22 +1,22 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-
 class BookService
 {
     /**
      * 検索・ソート条件に応じた書籍一覧をページネーションで取得する
-     * @param array $params リクエストパラメーター(keyword,genre,sort)
-     * @return LengthAwarePaginator
+     *
+     * @param  array  $params  リクエストパラメーター(keyword,genre,sort)
      */
-    public function getBookList(array $param = []):LengthAwarePaginator
-    {   
-        //ジャンル情報と、レビューの星の平均を一緒に持ってくる
-        $query = Book::with('genres')->withAvg('reviews','rating');
+    public function getBookList(array $param = []): LengthAwarePaginator
+    {
+        // ジャンル情報と、レビューの星の平均を一緒に持ってくる
+        $query = Book::with('genres')->withAvg('reviews', 'rating');
 
         /*
         //検索機能（本タイトルか著者）
@@ -28,9 +28,9 @@ class BookService
         });
         */
 
-        //ジャンルの絞り込み機能
-        //上記同様の理由で入れ子になっている
-        //whereHasメソッドは自分が持っているモデルクラスじゃなく別テーブルを見に行ってくれるメソッド
+        // ジャンルの絞り込み機能
+        // 上記同様の理由で入れ子になっている
+        // whereHasメソッドは自分が持っているモデルクラスじゃなく別テーブルを見に行ってくれるメソッド
         /*
         $query->when($params['genre'] ?? null, function ($q,$genre){
             $q->whereHas('genres',function($subQuery) use ($genre{
@@ -39,7 +39,7 @@ class BookService
         });
         */
 
-        //並び替え機能
+        // 並び替え機能
         /*
         $sort = $params['sort'] ?? 'latest'; //デフォルトはlatest(最新順)
         if($sort === 'latest') {
@@ -58,11 +58,8 @@ class BookService
 
     /**
      * 書籍詳細画面に必要なデータをロードして返す
-     * 
-     * @param Book $book
-     * @return Book
      */
-    public function getBookDetails(Book $book):Book
+    public function getBookDetails(Book $book): Book
     {
         $book->load([
             'genres',
@@ -74,45 +71,36 @@ class BookService
         return $book;
     }
 
-    
-
     /**
      * 書籍の新規登録
-     * @param array $validateDate
-     * @param int $userId
-     * @return Book
+     *
+     * @param  array  $validateDate
      */
-    public function storeBook(array $validatedData,int $userId, ):Book
-    {   
-        //バリデーションデータからジャンルのIDを取る
+    public function storeBook(array $validatedData, int $userId): Book
+    {
+        // バリデーションデータからジャンルのIDを取る
         $genreId = $validatedData['genres'];
 
-        //書籍の保存には不要なジャンルを切り離す
+        // 書籍の保存には不要なジャンルを切り離す
         unset($validatedData['genres']);
 
-        //このままだと、$validatedDataの中にはuser_idがないので追加する
+        // このままだと、$validatedDataの中にはuser_idがないので追加する
         $validatedData['user_id'] = $userId;
-        
-        
-        //データベスに保存
+
+        // データベスに保存
         $book = Book::create($validatedData);
 
-        //中間テーブルに紐付け
+        // 中間テーブルに紐付け
         $book->genres()->sync($genreId);
 
         return $book;
-
-
-
-
-
 
     }
 
     /**
      * 編集画面に必要なデータを取得する
      */
-    public function getEditDate(Book $book):array
+    public function getEditDate(Book $book): array
     {
         return [
             'book' => $book,
@@ -124,12 +112,12 @@ class BookService
     /**
      * 書籍の更新処理
      */
-    public function updateBook(Book $book,array $data):Book
-    {   //booksテーブルを更新
+    public function updateBook(Book $book, array $data): Book
+    {   // booksテーブルを更新
         $book->update($data);
 
-        //書籍とジャンルの中間テーブルのbook_genreテーブルを更新
-        if (isset($data['genres'])){
+        // 書籍とジャンルの中間テーブルのbook_genreテーブルを更新
+        if (isset($data['genres'])) {
             $book->genres()->sync($data['genres']);
         }
 

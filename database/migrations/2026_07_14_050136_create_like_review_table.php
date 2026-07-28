@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('review_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
 
-            //複合ユニーク制約：重複いいね防止
-            $table->unique(['user_id','review_id']);
+            // 複合ユニーク制約：重複いいね防止
+            $table->unique(['user_id', 'review_id']);
         });
     }
 

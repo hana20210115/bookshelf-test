@@ -17,7 +17,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        $owner = User::first();//山田太郎
+        $owner = User::first(); // 山田太郎
 
         $booksData = [
             ['title' => '吾輩は猫である', 'author' => '夏目漱石', 'isbn' => '9784101010014', 'published_date' => '1905-01-01', 'genres' => ['小説']],
@@ -33,10 +33,10 @@ class BookSeeder extends Seeder
             ['title' => 'コンテナ物語', 'author' => 'マルク・レビンソン', 'isbn' => '9784822251468', 'published_date' => '2007-01-18', 'genres' => ['ビジネス', '歴史']],
         ];
         // image_urlの末尾につける連番を作るために　$index=>$data という形にしてindex番号を取得している
-        foreach($booksData as $index => $data){
-            
+        foreach ($booksData as $index => $data) {
+
             $bookNumber = $index + 1;
-            
+
             $book = Book::firstOrCreate(
                 ['isbn' => $data['isbn']],
                 [
@@ -48,13 +48,11 @@ class BookSeeder extends Seeder
                     'image_url' => "https://placehold.co/200x300/e2e8f0/475569?text={$bookNumber}",
                 ]
             );
-        
 
-        //ジャンルIDをwhereInメソッドで複数取得して、toArrayメソッドでオブジェクトからただの配列の形にしている
-        //Bookモデルで作ったgenresメソッドを使って中間テーブルを操作する準備して、syncメソッドにジャンルIDを渡して本とジャンルを同期させている。
-        $genreIds = Genre::whereIn('name',$data['genres'])->pluck('id')->toArray();
-        $book->genres()->sync($genreIds);
-
+            // ジャンルIDをwhereInメソッドで複数取得して、toArrayメソッドでオブジェクトからただの配列の形にしている
+            // Bookモデルで作ったgenresメソッドを使って中間テーブルを操作する準備して、syncメソッドにジャンルIDを渡して本とジャンルを同期させている。
+            $genreIds = Genre::whereIn('name', $data['genres'])->pluck('id')->toArray();
+            $book->genres()->sync($genreIds);
 
         }
     }
