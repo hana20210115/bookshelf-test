@@ -18,17 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// トップページ(書籍一覧)
-Route::get('/books', [BookController::class, 'index'])->name('books.index');
-
-// 書籍詳細画面の表示
-Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
-
-// ログアウト後のリダイレクト先
-Route::redirect('/', '/books');
-
-// ランキング画面の表示（ゲストにも表示可）
-Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
 
 // ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function () {
@@ -83,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/genres/{genre}', [GenreController::class, 'show'])->name('genres.show');
 
     // ジャンル編集画面へ遷移
-    Route::get('/genre/{genre}/edit', [GenreController::class, 'edit'])->name('genres.edit');
+    Route::get('/genres/{genre}/edit', [GenreController::class, 'edit'])->name('genres.edit');
     // ジャンル編集処理
     Route::put('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
 
@@ -91,3 +80,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/genres/{genre}',[GenreController::class, 'destroy'])->name('genres.destroy');
 
 });
+
+// トップページ(書籍一覧)
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+
+// 書籍詳細画面の表示
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+
+// ログアウト後のリダイレクト先
+Route::redirect('/', '/books');
+
+// ランキング画面の表示（ゲストにも表示可）
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
+
