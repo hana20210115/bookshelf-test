@@ -13,7 +13,7 @@ class GenreTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * 書籍登録時にジャンルを選択して送信した場合、中間テーブル(DB.book_genre_table)にbook_id,genre_idが保存され、書類作成画面にリダイレクト
+     * 書籍登録時にジャンルを選択して送信した場合、中間テーブル(DB.book_genre_table)にbook_id,genre_idが保存され、書類作成画面にリダイレクト 302 Found
      * @return void
      */
     public function test_書籍登録時にジャンルを選択した場合中間テーブルに保存される():void
