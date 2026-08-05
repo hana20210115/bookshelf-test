@@ -34,13 +34,14 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ], [
             'name.required' => '名前を入力してください',
-            'email.required' => 'メールアドレスを入力したください',
-            'email.unique' => '有効なメールアドレスを
-            入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.unique' => '有効なメールアドレスを入力してください',
             'password.required' => 'パスワードを入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
             'password.confirmed' => 'パスワードと一致しません',
         ])->validate();
+
+        
 
         return User::create([
             'name' => $input['name'],
