@@ -33,8 +33,6 @@ class BookApiService
         // $dataの配列の中からgenresキーを取り除く（元のデータはそのまま）
         $bookData = Arr::except($data, ['genres']);
 
-        // sanctumの認証機能は応用編なのでuser_id=1にしておく
-        $bookData['user_id'] = 1;
 
         // 書籍を保存
         $book = Book::create($bookData);
