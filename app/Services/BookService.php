@@ -66,7 +66,6 @@ class BookService
             'reviews.user',
         ]);
 
-        $book->loadCount('favorites');
 
         return $book;
     }
