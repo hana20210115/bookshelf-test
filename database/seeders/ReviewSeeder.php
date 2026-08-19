@@ -21,24 +21,27 @@ class ReviewSeeder extends Seeder
         $books = Book::all();
 
         $comments = [
-            'とても素晴らしい本でした。何度でも読み返したいです。',
-            '考えさせられる内容が多く、今後の人生に活かせそうです。',
-            '内容はいいのですが、少し難しい部分がありました。',
-            '期待通りの内容で満足です。友達にも勧めたいです。',
-            '最初は退屈でしたが、後半から一気に面白くなりました。',
+            1 => '期待はずれでした',
+            2 => '少し難しい内容でした',
+            3 => '普通のです',
+            4 => 'とても良かったです',
+            5 => '最高の良書です',
         ];
 
         foreach ($books as $book) {
             $reviewCount = rand(2, 4); // 2~4の数字を生成
             $reviewers = $users->random($reviewCount); // ランダムで選ばれたユーザーを取得
 
-            // 上で選ばれた2〜4人のユーザーを１人ずつ取り出して処理している
+            // 上で選ばれたランダムユーザーを１人ずつ取り出して処理している
             foreach ($reviewers as $user) {
+
+                $rating = rand(1,5);
+
                 Review::create([
                     'book_id' => $book->id,
                     'user_id' => $user->id,
-                    'rating' => rand(3, 5), // ランダムで3〜５の評価をしている
-                    'comment' => $comments[array_rand($comments)], // array_randメソッドでランダムでインデックス番号を取り出している。
+                    'rating' => $rating, // ランダムで1〜５の評価をしている
+                    'comment' => $comments[$rating], // 評価の数字と同じキーのコメントをしている
                 ]);
             }
         }
