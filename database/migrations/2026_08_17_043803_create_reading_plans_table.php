@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('reading_plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
-            $table->date('target_data');
+            $table->date('target_date');
             $table->string('status')->default(ReadingPlanStatus::IN_PROGRESS->value);
             $table->timestamps();
         });
