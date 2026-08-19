@@ -53,4 +53,15 @@ class Book extends Model
     {
         return $this->belongsToMany(user::class, 'favorites');
     }
+
+    /**
+     * 
+     * この書籍に紐づく読書計画（1対多）
+     * 
+     * @return HasMany
+     */
+    public function readingPlans():HasMany
+    {
+        return $this->HasMany(ReadingPlan::class);
+    }
 }
