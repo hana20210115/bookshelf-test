@@ -12,6 +12,7 @@ class BookService
      * 検索・ソート条件に応じた書籍一覧をページネーションで取得する
      *
      * @param  array  $params  リクエストパラメーター(keyword,genre,sort)
+     * @return LengthAwarePaginator
      */
     public function getBookList(array $param = []): LengthAwarePaginator
     {
@@ -58,6 +59,8 @@ class BookService
 
     /**
      * 書籍詳細画面に必要なデータをロードして返す
+     * @param Book $book
+     * @return Book
      */
     public function getBookDetails(Book $book): Book
     {
@@ -73,7 +76,10 @@ class BookService
     /**
      * 書籍の新規登録
      *
-     * @param  array  $validateDate
+     * @param array $validateDate
+     * @param int $userId
+     * @return Book
+     *
      */
     public function storeBook(array $validatedData, int $userId): Book
     {
@@ -98,6 +104,8 @@ class BookService
 
     /**
      * 編集画面に必要なデータを取得する
+     * @param Book $book
+     * @return array
      */
     public function getEditDate(Book $book): array
     {
@@ -110,6 +118,9 @@ class BookService
 
     /**
      * 書籍の更新処理
+     * @param Book $book
+     * @param array $data
+     * @return Book
      */
     public function updateBook(Book $book, array $data): Book
     {   // booksテーブルを更新

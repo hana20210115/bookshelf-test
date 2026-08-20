@@ -10,6 +10,9 @@ class BookApiService
 {
     /**
      * 一覧取得
+     * @param $request
+     * @return LengthAwarePaginator
+     * 
      */
     public function getList($request): LengthAwarePaginator
     {
@@ -26,7 +29,8 @@ class BookApiService
     /**
      * 新規登録
      *
-     * @param  int  $userId
+     * @param  array $data
+     * @return Book
      */
     public function create(array $data): Book
     {
@@ -47,6 +51,9 @@ class BookApiService
 
     /**
      * 更新
+     * @param Book $book
+     * @param array $data
+     * @return Book
      */
     public function update(Book $book, array $data): Book
     {
