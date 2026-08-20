@@ -5,6 +5,9 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReadingPlanController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
-
 
 // ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function () {
     // 書籍登録画面の表示
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+
+    // ★追加：書籍登録時のISBN検索用API
+    Route::get('/books/search-isbn', [BookController::class, 'searchIsbn'])->name('books.search-isbn');
 
     // 書籍の登録処理
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
@@ -54,32 +55,28 @@ Route::middleware('auth')->group(function () {
     // 自分の書籍を削除する
     Route::delete('/books/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
 
-    // ランキング画面の表示
-    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
-
     // お気に入りの一覧画面の表示
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 
-    // ジャンル管理画面の表示
-    Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
+    // ジャンル（一覧、作成、保存、編集、更新、削除）
+    Route::resource('genres', GenreController::class);
 
-    // ジャンル登録画面へ遷移する
-    Route::get('/genres/create', [GenreController::class, 'create'])->name('genres.create');
-    // ジャンル登録処理
-    Route::post('/genres', [GenreController::class, 'store'])->name('genres.store');
+    // ★追加：マイ読書レポート
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
-    // ジャンル詳細画面へ遷移する
-    Route::get('/genres/{genre}', [GenreController::class, 'show'])->name('genres.show');
+    // 読書計画（一覧、作成、保存、編集、更新、削除）
+    Route::resource('reading-plans', ReadingPlanController::class)->except(['show']);
 
-    // ジャンル編集画面へ遷移
-    Route::get('/genres/{genre}/edit', [GenreController::class, 'edit'])->name('genres.edit');
-    // ジャンル編集処理
-    Route::put('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
+    // 読書計画の『読了』アクション
+    Route::patch('/reading-plans/{reading_plan}/complete', [ReadingPlanController::class, 'complete'])->name('reading-plans.complete');
 
-    // ジャンルの削除処理
-    Route::delete('/genres/{genre}',[GenreController::class, 'destroy'])->name('genres.destroy');
+    // 通知一覧表示
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
+    // 通知既読化
+    Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 });
+
 
 // トップページ(書籍一覧)
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
@@ -92,4 +89,3 @@ Route::redirect('/', '/books');
 
 // ランキング画面の表示（ゲストにも表示可）
 Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
-
