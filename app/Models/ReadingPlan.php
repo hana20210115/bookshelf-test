@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Model;
 use App\Enums\RedingPlansStatus;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Enums\ReadingPlanStatus;
 
 class ReadingPlan extends Model
 {
@@ -16,11 +17,13 @@ class ReadingPlan extends Model
         'book_id',
         'target_date',
         'status',
+        'completed_at',
     ];
 
     Protected $casts = [
         'target_date' => 'date',
         'status' => ReadingPlanStatus::class,
+        'completed_at' => 'datetime',
     ];
 
     /**
