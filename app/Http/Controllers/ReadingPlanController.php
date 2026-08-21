@@ -36,12 +36,13 @@ class ReadingPlanController extends Controller
      */
     public function index(Request $request): View
     {
+        $currentStatus = $request->status;
         $readingPlans = $this->readingPlanService->getReadingPlans(
             Auth::id(),
-            $request->status
+            $currentStatus
         );
 
-        return view('reading_plans.index', compact('readingPlans'));
+        return view('reading-plans.index', compact('readingPlans','currentStatus'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ReadingPlanController extends Controller
     {
         $books = $this->readingPlanService->getAllBooks();
 
-        return view('reading_plans.create', compact('books'));
+        return view('reading-plans.create', compact('books'));
     }
 
     /**
@@ -79,7 +80,7 @@ class ReadingPlanController extends Controller
     {
         abort_if($readingPlan->user_id !== Auth::id(), 403);
 
-        return view('reading_plans.edit', compact('readingPlan'));
+        return view('reading-plans.edit', compact('readingPlan'));
     }
 
     /**

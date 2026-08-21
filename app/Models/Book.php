@@ -22,6 +22,10 @@ class Book extends Model
         'image_url',
     ];
 
+    protected $casts = [
+        'published_date' => 'date',
+    ];
+
     /**
      * この書籍を登録したユーザー（1対1)
      */
@@ -64,4 +68,6 @@ class Book extends Model
     {
         return $this->HasMany(ReadingPlan::class);
     }
+
+    
 }

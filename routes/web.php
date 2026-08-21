@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('reading-plans', ReadingPlanController::class)->except(['show']);
 
     // 読書計画の『読了』アクション
-    Route::patch('/reading-plans/{reading_plan}/complete', [ReadingPlanController::class, 'complete'])->name('reading-plans.complete');
+    Route::post('/reading-plans/{reading_plan}/complete', [ReadingPlanController::class, 'complete'])->name('reading-plans.complete');
 
     // 通知一覧表示
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

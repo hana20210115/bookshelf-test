@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use App\Models\ReadingPlan;
 use App\Models\Book;
@@ -96,6 +96,7 @@ class ReadingPlanService
     {
         return $readingPlan->update([
             'status' => ReadingPlanStatus::COMPLETED,
+            'completed_at' => now(),
         ]);
     }
 

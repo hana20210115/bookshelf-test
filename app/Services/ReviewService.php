@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Book;
 use App\Models\Review;
+use Illuminate\Validation\ValidationException;
 
 class ReviewService
 {
@@ -16,6 +17,16 @@ class ReviewService
      */
     public function storeReview(Book $book, array $validatedData, int $userId): Review
     {
+        $exists = Review::where('book_id', $book->id)
+            ->where('user_id', $userId)
+            ->exists();
+
+        if ($exists) {
+            throw ValidationException::withMessages([
+                'comment' => ['この書籍にはすでにレビューを投稿済みです。'],
+            ]);
+        }
+
         return $book->reviews()->create([
             'user_id' => $userId,
             'rating' => $validatedData['rating'],
