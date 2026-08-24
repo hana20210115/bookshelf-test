@@ -34,9 +34,12 @@ class BookController extends Controller
     {
         $params = $request->only(['keyword', 'genre', 'sort']);
 
+        //画面のドロップダウン用にすべてのジャンルを取得
+        $genres = Genre::all();
+
         $books = $this->bookService->getBookList($params);
 
-        return view('books.index', compact('books', 'params'));
+        return view('books.index', compact('books', 'params','genres'));
     }
 
     /**
