@@ -4,47 +4,49 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use App\Models\Review;
-use App\models\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-/**
- * レビューのテストデータを投入するシーダークラス
- */
 class ReviewSeeder extends Seeder
 {
     /**
-     * データベースにデータを投入する
+     * Run the database seeds.
      */
     public function run(): void
     {
         $users = User::all();
         $books = Book::all();
 
+        if ($users->isEmpty() || $books->isEmpty()) {
+            return;
+        }
+
+        // 評価別の日本語定型コメントテンプレート
         $comments = [
-            1 => '期待はずれでした',
-            2 => '少し難しい内容でした',
-            3 => '普通のです',
-            4 => 'とても良かったです',
-            5 => '最高の良書です',
+            1 => 'あまり参考になりませんでした。',
+            2 => '少し内容が難しかったです。',
+            3 => '普通の内容でした。',
+            4 => 'とても分かりやすく、参考になりました！',
+            5 => '最高の一冊でした！何度も読み返します。',
         ];
 
         foreach ($books as $book) {
-            $reviewCount = rand(2, 4); // 2~4の数字を生成
-            $reviewers = $users->random($reviewCount); // ランダムで選ばれたユーザーを取得
+            // 各書籍に対して 2〜4 件のレビューを作成
+            $reviewCount = rand(2, 4);
 
-            // 上で選ばれたランダムユーザーを１人ずつ取り出して処理している
-            foreach ($reviewers as $user) {
+            // 【重要】同一書籍内でユーザーが重複しないよう、ユーザーをシャッフルして必要な人数だけ抽出
+            $reviewers = $users->shuffle()->take($reviewCount);
 
-                $rating = rand(1,5);
+            foreach ($reviewers as $reviewer) {
+                $rating = rand(1, 5);
 
                 Review::create([
                     'book_id' => $book->id,
-                    'user_id' => $user->id,
-                    'rating' => $rating, // ランダムで1〜５の評価をしている
-                    'comment' => $comments[$rating], // 評価の数字と同じキーのコメントをしている
+                    'user_id' => $reviewer->id,
+                    'rating' => $rating,
+                    'comment' => $comments[$rating],
                 ]);
             }
         }
-
     }
 }
