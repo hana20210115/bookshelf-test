@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Notification;
 
 class User extends Authenticatable
 {
@@ -84,5 +85,21 @@ class User extends Authenticatable
     public function readingPlans(): HasMany
     {
         return $this->hasMany(ReadingPlan::class);
+    }
+
+    /**
+     * ユーザーが持つすべての通知を取得する
+     */
+    public function notifications():HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
+     * 未読の通知だけ取得する
+     */
+    public function unreadNotifications():HasMany
+    {
+        return $this->hasMany(Notification::class)->whereNull('read_at');
     }
 }

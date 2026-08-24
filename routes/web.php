@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     // 書籍登録画面の表示
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
 
-    // ★追加：書籍登録時のISBN検索用API
+    // 書籍登録時のISBN検索用API
     Route::get('/books/search-isbn', [BookController::class, 'searchIsbn'])->name('books.search-isbn');
 
     // 書籍の登録処理
@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     // ジャンル（一覧、作成、保存、編集、更新、削除）
     Route::resource('genres', GenreController::class);
 
-    // ★追加：マイ読書レポート
+    // マイ読書レポート
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
     // 読書計画（一覧、作成、保存、編集、更新、削除）
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
     // 通知既読化
-    Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 });
 
 
