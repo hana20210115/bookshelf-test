@@ -52,12 +52,15 @@ class BookApiController extends Controller
      */
     public function store(StoreBookApiRequest $request): JsonResponse
     {
-        // ログインユーザーIDとバリデーションを通ったデータをサービスに渡して保存する
-        $book = $this->bookApiService->create($request->validated());
+        $data =$request->validated();
+
+        $data['user_id'] = $request->user()->id;
+
+        $book = $this->bookApiService->create($data);
 
         $book->load('genres');
 
-        return response()->json(new BookResource($book), 201);
+        return response()->json(new BookResource($book),201);
     }
 
     /**
@@ -67,6 +70,10 @@ class BookApiController extends Controller
      */
     public function update(UpdateBookApiRequest $request, Book $book): JsonResponse
     {
+        if ($book->user_id !== $request->user()->id) {
+            return response()->json(['message' => 'この操作は許可されていません。'], 403);
+        }
+
         $book = $this->bookApiService->update($book, $request->validated());
 
         $book->load('genres');
@@ -79,6 +86,9 @@ class BookApiController extends Controller
      */
     public function destroy(Request $request, Book $book): JsonResponse
     {
+        if ($book->user_id !== $request->user()->id) {
+            return response()->json(['message' => 'この操作は許可されていません。'], 403);
+        }
         $book->delete();
 
         return response()->json(null, 204);
