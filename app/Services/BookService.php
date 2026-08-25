@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Http;
 
 class BookService
 {
@@ -134,5 +135,31 @@ class BookService
 
         return $book;
 
+    }
+
+    /**
+     * ISBNから書籍情報を取得する(Google Books API)
+     * 
+     * @param string $isbn
+     * @return array|null
+     */
+    public function getBookInfoByIsbn(string $isbn): ?array
+    {
+        $response = Http::get("https://www.googleapis.com/books/v1/volumes?q=isbn:{$isbn}");
+
+        //通信が成功し、1件以上のデータが見つかったら、最初の1件のデータを返す
+        if ($response->successful() && $response->json('totalItems') > 0){
+            $bookData = $response->json('items')[0]['volumeInfo'];
+
+            return [
+                'title' => $bookData['title'] ?? '',
+                'author' => isset($bookData['authors']) ? implode(', ', $bookData['authors']) : '',
+                'published_date' => $bookData['publishedDate'] ?? '',
+                'description' => $bookData['description'] ?? '',
+                'image_url' => $bookData['imageLinks']['thumbnail'] ?? '',
+            ];
+        }
+
+        return null;
     }
 }
