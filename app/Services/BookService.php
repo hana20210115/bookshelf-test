@@ -141,25 +141,52 @@ class BookService
      * ISBNから書籍情報を取得する(Google Books API)
      * 
      * @param string $isbn
-     * @return array|null
+     * @return array
      */
-    public function getBookInfoByIsbn(string $isbn): ?array
+    public function getBookInfoByIsbn(string $isbn): array
     {
         $response = Http::get("https://www.googleapis.com/books/v1/volumes?q=isbn:{$isbn}");
 
-        //通信が成功し、1件以上のデータが見つかったら、最初の1件のデータを返す
-        if ($response->successful() && $response->json('totalItems') > 0){
-            $bookData = $response->json('items')[0]['volumeInfo'];
+
+        if ($response->failed()) {
+            $status = $response->status();
+            $message = '書籍情報の取得に失敗しました。';
+
+
+            if ($status === 429) {
+                $message = 'アクセスが集中しています。しばらく経ってから再度お試しください。';
+            } elseif ($status === 422 || $status === 400) {
+                $message = '不正なISBN形式です。';
+            }
 
             return [
+                'is_success' => false,
+                'status' => $status, // 422ならそのまま422を返す！
+                'message' => $message
+            ];
+        }
+
+        if ($response->json('totalItems') === 0) {
+            return [
+                'is_success' => false,
+                'status' => 404,
+                'message' => '書籍情報が見つかりませんでした。'
+            ];
+        }
+
+
+        $bookData = $response->json('items')[0]['volumeInfo'];
+
+        return [
+            'is_success' => true,
+            'status' => 200,
+            'data' => [
                 'title' => $bookData['title'] ?? '',
                 'author' => isset($bookData['authors']) ? implode(', ', $bookData['authors']) : '',
                 'published_date' => $bookData['publishedDate'] ?? '',
                 'description' => $bookData['description'] ?? '',
                 'image_url' => $bookData['imageLinks']['thumbnail'] ?? '',
-            ];
-        }
-
-        return null;
+            ]
+        ];
     }
 }

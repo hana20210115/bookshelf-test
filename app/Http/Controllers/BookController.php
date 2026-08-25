@@ -131,17 +131,18 @@ class BookController extends Controller
      */
     public function searchByIsbn(string $isbn):JsonResponse
     {
-        if(!preg_match('/^[0-9]{13}$/',$isbn)){
-            return response()->json(['error' =>'書籍情報が見つかりませんでした'],422);
+        $result = $this->bookService->getBookInfoByIsbn($isbn);
+
+
+        if (!$result['is_success']) {
+
+            return response()->json(
+                ['error' => $result['message']], 
+                $result['status']
+            );
         }
 
-        $bookInfo = $this->bookService->getBookInfoByIsbn($isbn);
 
-        // 書籍情報が取得できなかった場合は404エラーを返す
-        if (!$bookInfo){
-            return response()->json(['error' =>'書籍情報が見つかりませんでした'],404);
-        }
-
-        return response()->json($bookInfo,200);
+        return response()->json($result['data']);
     }
 }

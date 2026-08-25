@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 // ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function () {
-    //isbn検索APIのルートを追加
+    //isbn検索APIのルート
     Route::get('/books/isbn/{isbn}', [BookController::class, 'searchByIsbn'])->name('books.searchByIsbn');
 
     // 書籍登録画面の表示
