@@ -11,6 +11,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -119,5 +121,27 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', '書籍を削除しました');
 
+    }
+
+    /**
+     * ISBN検索（非同期処理通信API）
+     * 
+     * @param string $isbn
+     * @return JsonResponse
+     */
+    public function searchByIsbn(string $isbn):JsonResponse
+    {
+        if(!preg_match('/^[0-9]{13}$/',$isbn)){
+            return response()->json(['error' =>'書籍情報が見つかりませんでした'],422);
+        }
+
+        $bookInfo = $this->bookService->getBookInfoByIsbn($isbn);
+
+        // 書籍情報が取得できなかった場合は404エラーを返す
+        if (!$bookInfo){
+            return response()->json(['error' =>'書籍情報が見つかりませんでした'],404);
+        }
+
+        return response()->json($bookInfo,200);
     }
 }
