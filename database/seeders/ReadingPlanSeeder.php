@@ -5,7 +5,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\ReadingPlan;
-use APP\Models\User;
+use App\Models\User;
 use App\Enum\ReadingPlanStatus;
 use Carbon\Carbon;
 
@@ -21,8 +21,8 @@ class ReadingPlanSeeder extends Seeder
     public function run(): void
     {
         // ID:1のユーザー（主要テストと動作確認用）と、ID:2のユーザー（認可テスト用)を取得
-        $mainUser = User::findOrFail(1);
-        $otherUser = User::findOrFail(2);
+        $mainUser = User::find(1);
+        $otherUser = User::find(2);
 
         //一応ユーザーが存在しない場合はスキップするようにしておきます
         if (!$mainUser){
@@ -57,7 +57,7 @@ class ReadingPlanSeeder extends Seeder
 
         //読了:期日が機能＝完了済みのため何のしない
         ReadingPlan::create([
-            'user_id' => $mainUSer->id,
+            'user_id' => $mainUser->id,
             'book_id' => 4,
             'target_date' => Carbon::today()->subDays(3),
             'status' => ReadingPlanStatus::COMPLETED,
@@ -71,7 +71,16 @@ class ReadingPlanSeeder extends Seeder
                 'target_date' => Carbon::today()->addDays(3),
                 'status' => ReadingPlanStatus::IN_PROGRESS,
             ]);
+
         }
+
+        // 自動失効バッチのテスト対象データ（進行中のまま過去日になっている）
+        ReadingPlan::create([
+            'user_id' => $mainUser->id,
+            'book_id' => 5, // 他のデータと被らないIDにする
+            'target_date' => Carbon::today()->subDays(1), // 昨日
+            'status' => ReadingPlanStatus::IN_PROGRESS,
+        ]);
 
     }
 }

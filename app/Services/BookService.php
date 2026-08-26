@@ -144,7 +144,9 @@ class BookService
      * @return array
      */
     public function getBookInfoByIsbn(string $isbn): array
-    {
+    {   
+        
+
         $response = Http::get("https://www.googleapis.com/books/v1/volumes?q=isbn:{$isbn}");
 
 
