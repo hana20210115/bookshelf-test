@@ -77,7 +77,7 @@
                     },
                 });
                 const data = await response.json();
-
+console.log("バックエンドから届いたデータ: ", data);
                 if (data.error) {
                     errorEl.textContent = data.error;
                     errorEl.classList.remove('hidden');
