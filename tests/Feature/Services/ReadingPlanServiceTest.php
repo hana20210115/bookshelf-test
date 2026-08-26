@@ -112,4 +112,6 @@ class ReadingPlanServiceTest extends TestCase
         $readingPlan->refresh();
         $this->assertNotNull($readingPlan->completed_at);
     }
+
+    
 }
