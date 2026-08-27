@@ -19,7 +19,7 @@ class DailyBatchServiceTest extends TestCase
 
     protected function setUp():void
     {
-        parent::setUP();
+        parent::setUp();
         $this->dailyBatchService = new
         DailyBatchService();
     }
