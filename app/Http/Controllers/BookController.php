@@ -137,7 +137,7 @@ class BookController extends Controller
         if (!$result['is_success']) {
 
             return response()->json(
-                ['error' => $result['message']], 
+                ['error' => $result['message']],
                 $result['status']
             );
         }

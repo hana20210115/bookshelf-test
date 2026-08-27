@@ -231,4 +231,55 @@ class BookCrudTest extends TestCase
         $this->assertDatabaseMissing('reviews',['id' => $review->id]);
         $this->assertDatabaseMissing('favorites',['book_id' => $book->id]);
     }
+
+    /**
+     * 書籍一覧でキーワード検索がただいく機能するか検証
+     * 
+     * @return void
+     */
+    public function test_書籍一覧でキーワード検索が正しく機能するか(): void
+    {
+        $user = User::factory()->create();
+
+        Book::factory()->create(['title' => 'Laravel完全マスター', 'author' => '田中太郎']);
+
+        Book::factory()->create(['title' => 'PHP基礎大全', 'author' => '鈴木次郎']);
+        Book::factory()->create(['title' => 'はじめてのDocker', 'author' => '田中二郎']);
+
+
+        $response = $this->actingAs($user)->get('/books?keyword=田中');
+
+
+        $response->assertStatus(200);
+
+        $response->assertSee('Laravel完全マスター');
+        $response->assertSee('はじめてのDocker');
+        $response->assertDontSee('PHP基礎大全');
+    }
+
+    /**
+     * 書籍一覧でソート機能が正しく機能するか検証
+     * @return void
+     */
+    public function test_書籍一覧でソート機能が正しく機能するか(): void
+    {
+        $user = User::factory()->create();
+
+
+        $book1 = Book::factory()->create(['title' => 'Aの本', 'created_at' => now()->subDays(3)]);
+        $book2 = Book::factory()->create(['title' => 'Bの本', 'created_at' => now()->subDays(2)]);
+        $book3 = Book::factory()->create(['title' => 'Cの本', 'created_at' => now()->subDays(1)]);
+
+
+        $response = $this->actingAs($user)->get('/books?sort=oldest');
+
+        $response->assertStatus(200);
+
+
+        $response->assertSeeInOrder([
+            'Aの本',
+            'Bの本',
+            'Cの本',
+        ]);
+    }
 }
