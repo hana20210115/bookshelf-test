@@ -19,14 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 // ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function () {
+
     //isbn検索APIのルート
     Route::get('/books/isbn/{isbn}', [BookController::class, 'searchByIsbn'])->name('books.searchByIsbn');
 
     // 書籍登録画面の表示
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
 
-    // 書籍登録時のISBN検索用API
-    Route::get('/books/search-isbn', [BookController::class, 'searchIsbn'])->name('books.search-isbn');
 
     // 書籍の登録処理
     Route::post('/books', [BookController::class, 'store'])->name('books.store');

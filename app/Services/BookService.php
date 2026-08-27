@@ -147,7 +147,13 @@ class BookService
     {   
         
 
-        $response = Http::get("https://www.googleapis.com/books/v1/volumes?q=isbn:{$isbn}");
+        
+        $apiKey = config('services.google_books.api_key');
+
+        $response = Http::get('https://www.googleapis.com/books/v1/volumes', [
+            'q' => "isbn:{$isbn}",
+            'key' => $apiKey,
+        ]);
 
 
         if ($response->failed()) {
