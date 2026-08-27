@@ -7,6 +7,7 @@ use App\Http\Requests\Book\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Genre;
 use App\Services\BookService;
+use App\Http\Requests\IsbnSearchRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -125,23 +126,22 @@ class BookController extends Controller
 
     /**
      * ISBN検索（非同期処理通信API）
-     * 
-     * @param string $isbn
+     *
+     * @param IsbnSearchRequest $request
      * @return JsonResponse
      */
-    public function searchByIsbn(string $isbn):JsonResponse
+    public function searchByIsbn(IsbnSearchRequest $request): JsonResponse
     {
+        $isbn = $request->validated('isbn');
+
         $result = $this->bookService->getBookInfoByIsbn($isbn);
 
-
         if (!$result['is_success']) {
-
             return response()->json(
                 ['error' => $result['message']],
                 $result['status']
             );
         }
-
 
         return response()->json($result['data']);
     }
