@@ -54,7 +54,7 @@ class ReviewController extends Controller
 
         $this->reviewService->updateReview($review, $request->validated());
 
-        return redirect()->route('reviews.edit', $review)->with('success', 'レビューを更新しました。');
+        return redirect()->route('books.show', $review->book_id)->with('success', 'レビューを更新しました。');
     }
 
     /**
