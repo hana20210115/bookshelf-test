@@ -109,9 +109,13 @@ class ApiBookTest extends TestCase
      */
     public function test_APIで削除処理を行うと成功して204が返る():void
     {
-        $book = Book::factory()->create();
+        $user = User::factory()->create();
+        
 
-        $response = $this->deleteJson("api/v1/books/{$book->id}");
+        $book = Book::factory()->create(['user_id' => $user->id]);
+
+
+        $response = $this->actingAs($user, 'sanctum')->deleteJson("api/v1/books/{$book->id}");
 
         $response->assertStatus(204);
 
@@ -126,15 +130,18 @@ class ApiBookTest extends TestCase
      */
     public function test_APIで不正なデータを送信すると422バリデーションエラーが返る():void
     {
-        $response = $this->postJson('/api/v1/books',[]);
+        $user = User::factory()->create();
+
+
+        $response = $this->actingAs($user, 'sanctum')->postJson('/api/v1/books', []);
 
         $response->assertStatus(422);
 
         $response->assertJsonValidationErrors([
             'title' => 'タイトルを入力してください',
             'author' => '著者を入力してください',
-            ]);
+            // 他に必須項目のメッセージがあればここに合わせて記載
+        ]);
     }
 
-    
 }
