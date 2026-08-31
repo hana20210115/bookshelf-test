@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class IsbnSearchRequest extends FormRequest
 {
-    
     public function authorize(): bool
     {
         return true;
@@ -21,14 +20,12 @@ class IsbnSearchRequest extends FormRequest
         ];
     }
 
-
     protected function prepareForValidation(): void
     {
         $this->merge([
             'isbn' => $this->route('isbn'),
         ]);
     }
-
 
     protected function failedValidation(Validator $validator): void
     {
@@ -38,7 +35,6 @@ class IsbnSearchRequest extends FormRequest
             ], 422)
         );
     }
-
 
     public function messages(): array
     {

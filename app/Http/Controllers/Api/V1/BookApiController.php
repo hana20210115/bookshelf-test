@@ -52,7 +52,7 @@ class BookApiController extends Controller
      */
     public function store(StoreBookApiRequest $request): JsonResponse
     {
-        $data =$request->validated();
+        $data = $request->validated();
 
         $data['user_id'] = $request->user()->id;
 
@@ -60,7 +60,7 @@ class BookApiController extends Controller
 
         $book->load('genres');
 
-        return response()->json(new BookResource($book),201);
+        return response()->json(new BookResource($book), 201);
     }
 
     /**

@@ -59,15 +59,10 @@ class Book extends Model
     }
 
     /**
-     * 
      * この書籍に紐づく読書計画（1対多）
-     * 
-     * @return HasMany
      */
-    public function readingPlans():HasMany
+    public function readingPlans(): HasMany
     {
         return $this->HasMany(ReadingPlan::class);
     }
-
-    
 }

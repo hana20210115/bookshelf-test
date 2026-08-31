@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ReadingPlanStatus;
 use App\Models\Book;
 use App\Models\ReadingPlan;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Enums\ReadingPlanStatus;
 
 class ReadingPlanControllerTest extends TestCase
 {
@@ -15,14 +15,11 @@ class ReadingPlanControllerTest extends TestCase
 
     /**
      * 一覧画面、作成画面、編集画面にアクセスした場合、ステータス200が返るか検証
-     *
-     * @return void
      */
     public function test_画面表示が正常に行われること(): void
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
-
 
         $plan = ReadingPlan::create([
             'user_id' => $user->id,
@@ -38,10 +35,8 @@ class ReadingPlanControllerTest extends TestCase
 
     /**
      * 新規作成、更新、読了、削除の各リクエストを送信した場合、DBやステータスが正常に処理され、適切な画面へリダイレクトされるか検証
-     *
-     * @return void
      */
-    public function test_CRUD処理および読了アクションが正常に行われること(): void
+    public function test_cru_d処理および読了アクションが正常に行われること(): void
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
@@ -52,7 +47,6 @@ class ReadingPlanControllerTest extends TestCase
             'target_date' => now()->addDays(3)->format('Y-m-d'),
             'status' => ReadingPlanStatus::InProgress,
         ]);
-
 
         // 作成
 
@@ -65,15 +59,13 @@ class ReadingPlanControllerTest extends TestCase
             ])
             ->assertRedirect(route('reading-plans.create'));
 
-
         $this->assertDatabaseHas('reading_plans', [
             'user_id' => $user->id,
             'book_id' => $book->id,
             'target_date' => $targetDateStore,
             // 新規作成時はデフォルトで InProgress になると想定
-            'status' => ReadingPlanStatus::InProgress, 
+            'status' => ReadingPlanStatus::InProgress,
         ]);
-
 
         // 更新
 
@@ -85,12 +77,10 @@ class ReadingPlanControllerTest extends TestCase
             ])
             ->assertRedirect(route('reading-plans.index'));
 
-
         $this->assertDatabaseHas('reading_plans', [
             'id' => $plan->id,
             'target_date' => $targetDateUpdate,
         ]);
-
 
         // 読了
 
@@ -100,9 +90,8 @@ class ReadingPlanControllerTest extends TestCase
 
         $this->assertDatabaseHas('reading_plans', [
             'id' => $plan->id,
-            'status' => ReadingPlanStatus::COMPLETED, 
+            'status' => ReadingPlanStatus::COMPLETED,
         ]);
-
 
         // 削除
 

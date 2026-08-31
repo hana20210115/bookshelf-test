@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
 use App\Models\Book;
+use App\Models\Review;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends Factory<Review>
  */
 class ReviewFactory extends Factory
 {
@@ -21,8 +22,8 @@ class ReviewFactory extends Factory
         return [
             'user_id' => User::factory(),
             'book_id' => Book::factory(),
-            'rating' => fake()->numberBetween(1,5),
-            'comment' =>fake()->realText(30),
+            'rating' => fake()->numberBetween(1, 5),
+            'comment' => fake()->realText(30),
         ];
     }
 }

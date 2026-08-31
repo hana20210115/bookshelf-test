@@ -3,11 +3,11 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\RankingController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\RankingController;
+use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +20,11 @@ use Illuminate\Support\Facades\Route;
 // ログインしているユーザーだけがアクセスできるページ
 Route::middleware('auth')->group(function () {
 
-    //isbn検索APIのルート
+    // isbn検索APIのルート
     Route::get('/books/isbn/{isbn}', [BookController::class, 'searchByIsbn'])->name('books.searchByIsbn');
 
     // 書籍登録画面の表示
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
-
 
     // 書籍の登録処理
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
@@ -78,7 +77,6 @@ Route::middleware('auth')->group(function () {
     // 通知既読化
     Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 });
-
 
 // トップページ(書籍一覧)
 Route::get('/books', [BookController::class, 'index'])->name('books.index');

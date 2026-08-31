@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Services;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use App\Models\User;
+use App\Enums\ReadingPlanStatus;
 use App\Models\Book;
 use App\Models\ReadingPlan;
+use App\Models\User;
 use App\Services\DailyBatchService;
-use App\Enums\ReadingPlanStatus;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DailyBatchServiceTest extends TestCase
 {
@@ -17,23 +17,23 @@ class DailyBatchServiceTest extends TestCase
 
     private DailyBatchService $dailyBatchService;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->dailyBatchService = new
-        DailyBatchService();
+        $this->dailyBatchService = new DailyBatchService;
     }
 
     /**
      * 進行中で期日が昨日以前のデータのみが期限切れに更新されるか検証
+     *
      * @void
      */
-    public function test_進行中で期日が昨日以前のデータのみが期限切れに更新されること():void
+    public function test_進行中で期日が昨日以前のデータのみが期限切れに更新されること(): void
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
 
-        //失効対象データ
+        // 失効対象データ
         $targetPlan = ReadingPlan::create([
             'user_id' => $user->id,
             'book_id' => $book->id,
@@ -41,7 +41,7 @@ class DailyBatchServiceTest extends TestCase
             'status' => ReadingPlanStatus::IN_PROGRESS,
         ]);
 
-        //失効対象外データ
+        // 失効対象外データ
         $excludePlan = ReadingPlan::create([
             'user_id' => $user->id,
             'book_id' => $book->id,
@@ -51,29 +51,29 @@ class DailyBatchServiceTest extends TestCase
 
         $this->dailyBatchService->executeDailyBatch();
 
-        $this->assertDatabaseHas('reading_plans',[
+        $this->assertDatabaseHas('reading_plans', [
             'id' => $targetPlan->id,
             'status' => ReadingPlanStatus::OVERDUE,
         ]);
 
-        $this->assertDatabaseHas('reading_plans',[
+        $this->assertDatabaseHas('reading_plans', [
             'id' => $excludePlan->id,
             'status' => ReadingPlanStatus::IN_PROGRESS,
         ]);
-
 
     }
 
     /**
      * 進行中で期日が明日のデータのみリマインダー通知が作成されるか検証
+     *
      * @void
      */
-    public function test_進行中で明日が期日のデータのみリマインダー通知が作成されること():void
+    public function test_進行中で明日が期日のデータのみリマインダー通知が作成されること(): void
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
 
-        //通知対象データ
+        // 通知対象データ
         ReadingPlan::create([
             'user_id' => $user->id,
             'book_id' => $book->id,
@@ -85,10 +85,9 @@ class DailyBatchServiceTest extends TestCase
 
         $tomorrowFormatted = Carbon::tomorrow()->format('Y/m/d');
 
-        $this->assertDatabaseHas('notifications',[
+        $this->assertDatabaseHas('notifications', [
             'user_id' => $user->id,
             'message' => "『{$book->title}』の読書計画の期日が明日({$tomorrowFormatted})に迫っています",
         ]);
     }
-
 }

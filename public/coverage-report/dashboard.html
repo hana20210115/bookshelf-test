@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/var/www/html/app</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Controllers/NotificationController.php.html#11">App\Http\Controllers\NotificationController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/Api/SearchBookApiRequest.php.html#8">App\Http\Requests\Api\SearchBookApiRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Notification.php.html#8">App\Models\Notification</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Services/NotificationService.php.html#8">App\Services\NotificationService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#14">App\Models\User</a></td><td class="text-right">28%</td></tr>
+       <tr><td><a href="Models/ReadingPlan.php.html#11">App\Models\ReadingPlan</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Models/Book.php.html#11">App\Models\Book</a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Services/GenreService.php.html#9">App\Services\GenreService</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Http/Controllers/Api/V1/BookApiController.php.html#15">App\Http\Controllers\Api\V1\BookApiController</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="Http/Controllers/GenreController.php.html#12">App\Http\Controllers\GenreController</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Services/ReviewService.php.html#9">App\Services\ReviewService</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Http/Controllers/BookController.php.html#18">App\Http\Controllers\BookController</a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Services/BookApiService.php.html#9">App\Services\BookApiService</a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Services/BookService.php.html#10">App\Services\BookService</a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Services/BookService.php.html#10">App\Services\BookService</a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="Http/Controllers/BookController.php.html#18">App\Http\Controllers\BookController</a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="Http/Controllers/GenreController.php.html#12">App\Http\Controllers\GenreController</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Http/Controllers/Api/V1/BookApiController.php.html#15">App\Http\Controllers\Api\V1\BookApiController</a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Services/GenreService.php.html#9">App\Services\GenreService</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Services/BookApiService.php.html#9">App\Services\BookApiService</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Services/ReviewService.php.html#9">App\Services\ReviewService</a></td><td class="text-right">5</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Controllers/Api/V1/BookApiController.php.html#37"><abbr title="App\Http\Controllers\Api\V1\BookApiController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/GenreController.php.html#35"><abbr title="App\Http\Controllers\GenreController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/NotificationController.php.html#23"><abbr title="App\Http\Controllers\NotificationController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/NotificationController.php.html#33"><abbr title="App\Http\Controllers\NotificationController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/NotificationController.php.html#46"><abbr title="App\Http\Controllers\NotificationController::markAsRead">markAsRead</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/Api/SearchBookApiRequest.php.html#13"><abbr title="App\Http\Requests\Api\SearchBookApiRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/Api/SearchBookApiRequest.php.html#23"><abbr title="App\Http\Requests\Api\SearchBookApiRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/Api/SearchBookApiRequest.php.html#33"><abbr title="App\Http\Requests\Api\SearchBookApiRequest::messages">messages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Book.php.html#32"><abbr title="App\Models\Book::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Book.php.html#67"><abbr title="App\Models\Book::readingPlans">readingPlans</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Notification.php.html#25"><abbr title="App\Models\Notification::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Notification.php.html#30"><abbr title="App\Models\Notification::getDataAttribute">getDataAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/ReadingPlan.php.html#33"><abbr title="App\Models\ReadingPlan::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#52"><abbr title="App\Models\User::books">books</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#60"><abbr title="App\Models\User::reviews">reviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#76"><abbr title="App\Models\User::likedReviews">likedReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#85"><abbr title="App\Models\User::readingPlans">readingPlans</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#93"><abbr title="App\Models\User::notifications">notifications</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Services/GenreService.php.html#25"><abbr title="App\Services\GenreService::getPaginatedBooksGenre">getPaginatedBooksGenre</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Services/NotificationService.php.html#16"><abbr title="App\Services\NotificationService::getUserNotifications">getUserNotifications</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Services/NotificationService.php.html#29"><abbr title="App\Services\NotificationService::markAsRead">markAsRead</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/BookController.php.html#133"><abbr title="App\Http\Controllers\BookController::searchByIsbn">searchByIsbn</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Services/BookApiService.php.html#17"><abbr title="App\Services\BookApiService::getList">getList</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Services/BookService.php.html#18"><abbr title="App\Services\BookService::getBookList">getBookList</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Http/Controllers/Api/V1/BookApiController.php.html#87"><abbr title="App\Http\Controllers\Api\V1\BookApiController::destroy">destroy</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Http/Controllers/GenreController.php.html#81"><abbr title="App\Http\Controllers\GenreController::destroy">destroy</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Services/GenreService.php.html#57"><abbr title="App\Services\GenreService::deleteGenre">deleteGenre</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Services/ReadingPlanService.php.html#20"><abbr title="App\Services\ReadingPlanService::getReadingPlans">getReadingPlans</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Services/ReviewService.php.html#18"><abbr title="App\Services\ReviewService::storeReview">storeReview</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Enums/ReadingPlanStatus.php.html#31"><abbr title="App\Enums\ReadingPlanStatus::badgeClass">badgeClass</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Services/ReportService.php.html#69"><abbr title="App\Services\ReportService::getTopGenres">getTopGenres</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Services/ReportService.php.html#109"><abbr title="App\Services\ReportService::getRatingDistribution">getRatingDistribution</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Services/BookService.php.html#18"><abbr title="App\Services\BookService::getBookList">getBookList</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Services/ReportService.php.html#69"><abbr title="App\Services\ReportService::getTopGenres">getTopGenres</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Http/Controllers/BookController.php.html#133"><abbr title="App\Http\Controllers\BookController::searchByIsbn">searchByIsbn</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Services/BookApiService.php.html#17"><abbr title="App\Services\BookApiService::getList">getList</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Http/Controllers/Api/V1/BookApiController.php.html#87"><abbr title="App\Http\Controllers\Api\V1\BookApiController::destroy">destroy</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Http/Controllers/GenreController.php.html#81"><abbr title="App\Http\Controllers\GenreController::destroy">destroy</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Services/GenreService.php.html#57"><abbr title="App\Services\GenreService::deleteGenre">deleteGenre</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Services/ReadingPlanService.php.html#20"><abbr title="App\Services\ReadingPlanService::getReadingPlans">getReadingPlans</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Services/ReviewService.php.html#18"><abbr title="App\Services\ReviewService::storeReview">storeReview</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Services/ReportService.php.html#109"><abbr title="App\Services\ReportService::getRatingDistribution">getRatingDistribution</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.5.8</a> and <a href="https://phpunit.de/">PHPUnit 10.5.64</a> at Mon Aug 31 13:36:13 JST 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([4,0,0,1,0,0,1,1,2,5,3,26], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([21,0,0,0,0,0,1,2,5,3,1,117], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[76.19047619047619,8,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#15\">App\\Http\\Controllers\\Api\\V1\\BookApiController<\/a>"],[85.71428571428571,10,"<a href=\"Http\/Controllers\/BookController.php.html#18\">App\\Http\\Controllers\\BookController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Controller.php.html#9\">App\\Http\\Controllers\\Controller<\/a>"],[100,3,"<a href=\"Http\/Controllers\/FavoriteController.php.html#10\">App\\Http\\Controllers\\FavoriteController<\/a>"],[80,9,"<a href=\"Http\/Controllers\/GenreController.php.html#12\">App\\Http\\Controllers\\GenreController<\/a>"],[0,3,"<a href=\"Http\/Controllers\/NotificationController.php.html#11\">App\\Http\\Controllers\\NotificationController<\/a>"],[100,2,"<a href=\"Http\/Controllers\/RankingController.php.html#8\">App\\Http\\Controllers\\RankingController<\/a>"],[100,8,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#15\">App\\Http\\Controllers\\ReadingPlanController<\/a>"],[100,2,"<a href=\"Http\/Controllers\/ReportController.php.html#9\">App\\Http\\Controllers\\ReportController<\/a>"],[100,6,"<a href=\"Http\/Controllers\/ReviewController.php.html#14\">App\\Http\\Controllers\\ReviewController<\/a>"],[100,0,"<a href=\"Http\/Kernel.php.html#30\">App\\Http\\Kernel<\/a>"],[0,3,"<a href=\"Http\/Requests\/Api\/SearchBookApiRequest.php.html#8\">App\\Http\\Requests\\Api\\SearchBookApiRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Api\/StoreBookApiRequest.php.html#8\">App\\Http\\Requests\\Api\\StoreBookApiRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Api\/UpdateBookApiRequest.php.html#9\">App\\Http\\Requests\\Api\\UpdateBookApiRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Book\/StoreBookRequest.php.html#8\">App\\Http\\Requests\\Book\\StoreBookRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Book\/UpdateBookRequest.php.html#9\">App\\Http\\Requests\\Book\\UpdateBookRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Genre\/StoreGenreRequest.php.html#9\">App\\Http\\Requests\\Genre\\StoreGenreRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Genre\/UpdateGenreRequest.php.html#9\">App\\Http\\Requests\\Genre\\UpdateGenreRequest<\/a>"],[100,5,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#9\">App\\Http\\Requests\\IsbnSearchRequest<\/a>"],[100,4,"<a href=\"Http\/Requests\/ReadingPlan\/StoreReadingPlanRequest.php.html#7\">App\\Http\\Requests\\ReadingPlan\\StoreReadingPlanRequest<\/a>"],[100,4,"<a href=\"Http\/Requests\/ReadingPlan\/UpdateReadingPlanRequest.php.html#7\">App\\Http\\Requests\\ReadingPlan\\UpdateReadingPlanRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Review\/StoreReviewRequest.php.html#8\">App\\Http\\Requests\\Review\\StoreReviewRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Review\/UpdateReviewRequest.php.html#8\">App\\Http\\Requests\\Review\\UpdateReviewRequest<\/a>"],[100,1,"<a href=\"Http\/Resources\/BookResource.php.html#8\">App\\Http\\Resources\\BookResource<\/a>"],[60,5,"<a href=\"Models\/Book.php.html#11\">App\\Models\\Book<\/a>"],[100,1,"<a href=\"Models\/Genre.php.html#9\">App\\Models\\Genre<\/a>"],[0,2,"<a href=\"Models\/Notification.php.html#8\">App\\Models\\Notification<\/a>"],[50,2,"<a href=\"Models\/ReadingPlan.php.html#11\">App\\Models\\ReadingPlan<\/a>"],[100,3,"<a href=\"Models\/Review.php.html#10\">App\\Models\\Review<\/a>"],[28.57142857142857,7,"<a href=\"Models\/User.php.html#14\">App\\Models\\User<\/a>"],[100,2,"<a href=\"Policies\/BookPolicy.php.html#8\">App\\Policies\\BookPolicy<\/a>"],[100,2,"<a href=\"Policies\/ReviewPolicy.php.html#8\">App\\Policies\\ReviewPolicy<\/a>"],[86.66666666666667,6,"<a href=\"Services\/BookApiService.php.html#9\">App\\Services\\BookApiService<\/a>"],[88.31168831168831,17,"<a href=\"Services\/BookService.php.html#10\">App\\Services\\BookService<\/a>"],[100,3,"<a href=\"Services\/DailyBatchService.php.html#10\">App\\Services\\DailyBatchService<\/a>"],[100,2,"<a href=\"Services\/FavoriteService.php.html#9\">App\\Services\\FavoriteService<\/a>"],[75,6,"<a href=\"Services\/GenreService.php.html#9\">App\\Services\\GenreService<\/a>"],[0,2,"<a href=\"Services\/NotificationService.php.html#8\">App\\Services\\NotificationService<\/a>"],[100,1,"<a href=\"Services\/RankingService.php.html#8\">App\\Services\\RankingService<\/a>"],[95.45454545454545,8,"<a href=\"Services\/ReadingPlanService.php.html#11\">App\\Services\\ReadingPlanService<\/a>"],[90.1639344262295,11,"<a href=\"Services\/ReportService.php.html#11\">App\\Services\\ReportService<\/a>"],[81.25,5,"<a href=\"Services\/ReviewService.php.html#9\">App\\Services\\ReviewService<\/a>"],[90,2,"<a href=\"Enums\/ReadingPlanStatus.php.html#5\">App\\Enums\\ReadingPlanStatus<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#19\">App\\Http\\Controllers\\Api\\V1\\BookApiController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#27\">App\\Http\\Controllers\\Api\\V1\\BookApiController::index<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#37\">App\\Http\\Controllers\\Api\\V1\\BookApiController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#53\">App\\Http\\Controllers\\Api\\V1\\BookApiController::store<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#71\">App\\Http\\Controllers\\Api\\V1\\BookApiController::update<\/a>"],[75,2,"<a href=\"Http\/Controllers\/Api\/V1\/BookApiController.php.html#87\">App\\Http\\Controllers\\Api\\V1\\BookApiController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#27\">App\\Http\\Controllers\\BookController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#36\">App\\Http\\Controllers\\BookController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#51\">App\\Http\\Controllers\\BookController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#62\">App\\Http\\Controllers\\BookController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#73\">App\\Http\\Controllers\\BookController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#87\">App\\Http\\Controllers\\BookController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#101\">App\\Http\\Controllers\\BookController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/BookController.php.html#116\">App\\Http\\Controllers\\BookController::destroy<\/a>"],[50,2,"<a href=\"Http\/Controllers\/BookController.php.html#133\">App\\Http\\Controllers\\BookController::searchByIsbn<\/a>"],[100,1,"<a href=\"Http\/Controllers\/FavoriteController.php.html#14\">App\\Http\\Controllers\\FavoriteController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/FavoriteController.php.html#22\">App\\Http\\Controllers\\FavoriteController::toggle<\/a>"],[100,1,"<a href=\"Http\/Controllers\/FavoriteController.php.html#34\">App\\Http\\Controllers\\FavoriteController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#17\">App\\Http\\Controllers\\GenreController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#25\">App\\Http\\Controllers\\GenreController::index<\/a>"],[0,1,"<a href=\"Http\/Controllers\/GenreController.php.html#35\">App\\Http\\Controllers\\GenreController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#45\">App\\Http\\Controllers\\GenreController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#53\">App\\Http\\Controllers\\GenreController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#61\">App\\Http\\Controllers\\GenreController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/GenreController.php.html#71\">App\\Http\\Controllers\\GenreController::update<\/a>"],[75,2,"<a href=\"Http\/Controllers\/GenreController.php.html#81\">App\\Http\\Controllers\\GenreController::destroy<\/a>"],[0,1,"<a href=\"Http\/Controllers\/NotificationController.php.html#23\">App\\Http\\Controllers\\NotificationController::__construct<\/a>"],[0,1,"<a href=\"Http\/Controllers\/NotificationController.php.html#33\">App\\Http\\Controllers\\NotificationController::index<\/a>"],[0,1,"<a href=\"Http\/Controllers\/NotificationController.php.html#46\">App\\Http\\Controllers\\NotificationController::markAsRead<\/a>"],[100,1,"<a href=\"Http\/Controllers\/RankingController.php.html#12\">App\\Http\\Controllers\\RankingController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/RankingController.php.html#22\">App\\Http\\Controllers\\RankingController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#26\">App\\Http\\Controllers\\ReadingPlanController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#37\">App\\Http\\Controllers\\ReadingPlanController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#53\">App\\Http\\Controllers\\ReadingPlanController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#66\">App\\Http\\Controllers\\ReadingPlanController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#79\">App\\Http\\Controllers\\ReadingPlanController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#93\">App\\Http\\Controllers\\ReadingPlanController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#108\">App\\Http\\Controllers\\ReadingPlanController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReadingPlanController.php.html#123\">App\\Http\\Controllers\\ReadingPlanController::complete<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReportController.php.html#21\">App\\Http\\Controllers\\ReportController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReportController.php.html#31\">App\\Http\\Controllers\\ReportController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#21\">App\\Http\\Controllers\\ReviewController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#31\">App\\Http\\Controllers\\ReviewController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#41\">App\\Http\\Controllers\\ReviewController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#51\">App\\Http\\Controllers\\ReviewController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#63\">App\\Http\\Controllers\\ReviewController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ReviewController.php.html#75\">App\\Http\\Controllers\\ReviewController::like<\/a>"],[0,1,"<a href=\"Http\/Requests\/Api\/SearchBookApiRequest.php.html#13\">App\\Http\\Requests\\Api\\SearchBookApiRequest::authorize<\/a>"],[0,1,"<a href=\"Http\/Requests\/Api\/SearchBookApiRequest.php.html#23\">App\\Http\\Requests\\Api\\SearchBookApiRequest::rules<\/a>"],[0,1,"<a href=\"Http\/Requests\/Api\/SearchBookApiRequest.php.html#33\">App\\Http\\Requests\\Api\\SearchBookApiRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/StoreBookApiRequest.php.html#13\">App\\Http\\Requests\\Api\\StoreBookApiRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/StoreBookApiRequest.php.html#23\">App\\Http\\Requests\\Api\\StoreBookApiRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/StoreBookApiRequest.php.html#38\">App\\Http\\Requests\\Api\\StoreBookApiRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/UpdateBookApiRequest.php.html#14\">App\\Http\\Requests\\Api\\UpdateBookApiRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/UpdateBookApiRequest.php.html#24\">App\\Http\\Requests\\Api\\UpdateBookApiRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Api\/UpdateBookApiRequest.php.html#42\">App\\Http\\Requests\\Api\\UpdateBookApiRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/StoreBookRequest.php.html#13\">App\\Http\\Requests\\Book\\StoreBookRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/StoreBookRequest.php.html#23\">App\\Http\\Requests\\Book\\StoreBookRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/StoreBookRequest.php.html#38\">App\\Http\\Requests\\Book\\StoreBookRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/UpdateBookRequest.php.html#14\">App\\Http\\Requests\\Book\\UpdateBookRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/UpdateBookRequest.php.html#24\">App\\Http\\Requests\\Book\\UpdateBookRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Book\/UpdateBookRequest.php.html#42\">App\\Http\\Requests\\Book\\UpdateBookRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/StoreGenreRequest.php.html#14\">App\\Http\\Requests\\Genre\\StoreGenreRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/StoreGenreRequest.php.html#24\">App\\Http\\Requests\\Genre\\StoreGenreRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/StoreGenreRequest.php.html#32\">App\\Http\\Requests\\Genre\\StoreGenreRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/UpdateGenreRequest.php.html#14\">App\\Http\\Requests\\Genre\\UpdateGenreRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/UpdateGenreRequest.php.html#24\">App\\Http\\Requests\\Genre\\UpdateGenreRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Genre\/UpdateGenreRequest.php.html#33\">App\\Http\\Requests\\Genre\\UpdateGenreRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#12\">App\\Http\\Requests\\IsbnSearchRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#17\">App\\Http\\Requests\\IsbnSearchRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#25\">App\\Http\\Requests\\IsbnSearchRequest::prepareForValidation<\/a>"],[100,1,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#33\">App\\Http\\Requests\\IsbnSearchRequest::failedValidation<\/a>"],[100,1,"<a href=\"Http\/Requests\/IsbnSearchRequest.php.html#43\">App\\Http\\Requests\\IsbnSearchRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/StoreReadingPlanRequest.php.html#12\">App\\Http\\Requests\\ReadingPlan\\StoreReadingPlanRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/StoreReadingPlanRequest.php.html#22\">App\\Http\\Requests\\ReadingPlan\\StoreReadingPlanRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/StoreReadingPlanRequest.php.html#30\">App\\Http\\Requests\\ReadingPlan\\StoreReadingPlanRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/StoreReadingPlanRequest.php.html#39\">App\\Http\\Requests\\ReadingPlan\\StoreReadingPlanRequest::attributes<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/UpdateReadingPlanRequest.php.html#12\">App\\Http\\Requests\\ReadingPlan\\UpdateReadingPlanRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/UpdateReadingPlanRequest.php.html#22\">App\\Http\\Requests\\ReadingPlan\\UpdateReadingPlanRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/UpdateReadingPlanRequest.php.html#29\">App\\Http\\Requests\\ReadingPlan\\UpdateReadingPlanRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/ReadingPlan\/UpdateReadingPlanRequest.php.html#36\">App\\Http\\Requests\\ReadingPlan\\UpdateReadingPlanRequest::attributes<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/StoreReviewRequest.php.html#13\">App\\Http\\Requests\\Review\\StoreReviewRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/StoreReviewRequest.php.html#23\">App\\Http\\Requests\\Review\\StoreReviewRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/StoreReviewRequest.php.html#32\">App\\Http\\Requests\\Review\\StoreReviewRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/UpdateReviewRequest.php.html#13\">App\\Http\\Requests\\Review\\UpdateReviewRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/UpdateReviewRequest.php.html#23\">App\\Http\\Requests\\Review\\UpdateReviewRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Review\/UpdateReviewRequest.php.html#32\">App\\Http\\Requests\\Review\\UpdateReviewRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Resources\/BookResource.php.html#13\">App\\Http\\Resources\\BookResource::toArray<\/a>"],[0,1,"<a href=\"Models\/Book.php.html#32\">App\\Models\\Book::user<\/a>"],[100,1,"<a href=\"Models\/Book.php.html#40\">App\\Models\\Book::genres<\/a>"],[100,1,"<a href=\"Models\/Book.php.html#48\">App\\Models\\Book::reviews<\/a>"],[100,1,"<a href=\"Models\/Book.php.html#56\">App\\Models\\Book::favorites<\/a>"],[0,1,"<a href=\"Models\/Book.php.html#67\">App\\Models\\Book::readingPlans<\/a>"],[100,1,"<a href=\"Models\/Genre.php.html#20\">App\\Models\\Genre::books<\/a>"],[0,1,"<a href=\"Models\/Notification.php.html#25\">App\\Models\\Notification::user<\/a>"],[0,1,"<a href=\"Models\/Notification.php.html#30\">App\\Models\\Notification::getDataAttribute<\/a>"],[0,1,"<a href=\"Models\/ReadingPlan.php.html#33\">App\\Models\\ReadingPlan::user<\/a>"],[100,1,"<a href=\"Models\/ReadingPlan.php.html#42\">App\\Models\\ReadingPlan::book<\/a>"],[100,1,"<a href=\"Models\/Review.php.html#25\">App\\Models\\Review::book<\/a>"],[100,1,"<a href=\"Models\/Review.php.html#33\">App\\Models\\Review::user<\/a>"],[100,1,"<a href=\"Models\/Review.php.html#41\">App\\Models\\Review::likedByUsers<\/a>"],[0,1,"<a href=\"Models\/User.php.html#52\">App\\Models\\User::books<\/a>"],[0,1,"<a href=\"Models\/User.php.html#60\">App\\Models\\User::reviews<\/a>"],[100,1,"<a href=\"Models\/User.php.html#68\">App\\Models\\User::favoriteBooks<\/a>"],[0,1,"<a href=\"Models\/User.php.html#76\">App\\Models\\User::likedReviews<\/a>"],[0,1,"<a href=\"Models\/User.php.html#85\">App\\Models\\User::readingPlans<\/a>"],[0,1,"<a href=\"Models\/User.php.html#93\">App\\Models\\User::notifications<\/a>"],[100,1,"<a href=\"Models\/User.php.html#101\">App\\Models\\User::unreadNotifications<\/a>"],[100,1,"<a href=\"Policies\/BookPolicy.php.html#13\">App\\Policies\\BookPolicy::update<\/a>"],[100,1,"<a href=\"Policies\/BookPolicy.php.html#21\">App\\Policies\\BookPolicy::Delete<\/a>"],[100,1,"<a href=\"Policies\/ReviewPolicy.php.html#13\">App\\Policies\\ReviewPolicy::update<\/a>"],[100,1,"<a href=\"Policies\/ReviewPolicy.php.html#19\">App\\Policies\\ReviewPolicy::delete<\/a>"],[60,2,"<a href=\"Services\/BookApiService.php.html#17\">App\\Services\\BookApiService::getList<\/a>"],[100,2,"<a href=\"Services\/BookApiService.php.html#35\">App\\Services\\BookApiService::create<\/a>"],[100,2,"<a href=\"Services\/BookApiService.php.html#58\">App\\Services\\BookApiService::update<\/a>"],[68.18181818181817,5,"<a href=\"Services\/BookService.php.html#18\">App\\Services\\BookService::getBookList<\/a>"],[100,1,"<a href=\"Services\/BookService.php.html#67\">App\\Services\\BookService::getBookDetails<\/a>"],[100,1,"<a href=\"Services\/BookService.php.html#86\">App\\Services\\BookService::storeBook<\/a>"],[100,1,"<a href=\"Services\/BookService.php.html#112\">App\\Services\\BookService::getEditDate<\/a>"],[100,2,"<a href=\"Services\/BookService.php.html#127\">App\\Services\\BookService::updateBook<\/a>"],[94.28571428571428,7,"<a href=\"Services\/BookService.php.html#146\">App\\Services\\BookService::getBookInfoByIsbn<\/a>"],[100,1,"<a href=\"Services\/DailyBatchService.php.html#17\">App\\Services\\DailyBatchService::executeDailyBatch<\/a>"],[100,1,"<a href=\"Services\/DailyBatchService.php.html#28\">App\\Services\\DailyBatchService::processOverduePlans<\/a>"],[100,1,"<a href=\"Services\/DailyBatchService.php.html#42\">App\\Services\\DailyBatchService::createReminderNotifications<\/a>"],[100,1,"<a href=\"Services\/FavoriteService.php.html#17\">App\\Services\\FavoriteService::toggleFavorite<\/a>"],[100,1,"<a href=\"Services\/FavoriteService.php.html#27\">App\\Services\\FavoriteService::getFavoriteBooks<\/a>"],[100,1,"<a href=\"Services\/GenreService.php.html#15\">App\\Services\\GenreService::getGenresWithBookCount<\/a>"],[0,1,"<a href=\"Services\/GenreService.php.html#25\">App\\Services\\GenreService::getPaginatedBooksGenre<\/a>"],[100,1,"<a href=\"Services\/GenreService.php.html#35\">App\\Services\\GenreService::storeGenre<\/a>"],[100,1,"<a href=\"Services\/GenreService.php.html#46\">App\\Services\\GenreService::updateGenre<\/a>"],[75,2,"<a href=\"Services\/GenreService.php.html#57\">App\\Services\\GenreService::deleteGenre<\/a>"],[0,1,"<a href=\"Services\/NotificationService.php.html#16\">App\\Services\\NotificationService::getUserNotifications<\/a>"],[0,1,"<a href=\"Services\/NotificationService.php.html#29\">App\\Services\\NotificationService::markAsRead<\/a>"],[100,1,"<a href=\"Services\/RankingService.php.html#14\">App\\Services\\RankingService::getTopRatedBooks<\/a>"],[75,2,"<a href=\"Services\/ReadingPlanService.php.html#20\">App\\Services\\ReadingPlanService::getReadingPlans<\/a>"],[100,1,"<a href=\"Services\/ReadingPlanService.php.html#36\">App\\Services\\ReadingPlanService::getAllBooks<\/a>"],[100,1,"<a href=\"Services\/ReadingPlanService.php.html#48\">App\\Services\\ReadingPlanService::createReadingPlan<\/a>"],[100,2,"<a href=\"Services\/ReadingPlanService.php.html#64\">App\\Services\\ReadingPlanService::updateReadingPlan<\/a>"],[100,1,"<a href=\"Services\/ReadingPlanService.php.html#84\">App\\Services\\ReadingPlanService::deleteReadingPlan<\/a>"],[100,1,"<a href=\"Services\/ReadingPlanService.php.html#95\">App\\Services\\ReadingPlanService::completeReadingPlan<\/a>"],[100,2,"<a href=\"Services\/ReportService.php.html#18\">App\\Services\\ReportService::getSummary<\/a>"],[100,4,"<a href=\"Services\/ReportService.php.html#42\">App\\Services\\ReportService::getTopRatedBooks<\/a>"],[81.48148148148148,3,"<a href=\"Services\/ReportService.php.html#69\">App\\Services\\ReportService::getTopGenres<\/a>"],[87.5,2,"<a href=\"Services\/ReportService.php.html#109\">App\\Services\\ReportService::getRatingDistribution<\/a>"],[75,2,"<a href=\"Services\/ReviewService.php.html#18\">App\\Services\\ReviewService::storeReview<\/a>"],[100,1,"<a href=\"Services\/ReviewService.php.html#44\">App\\Services\\ReviewService::updateReview<\/a>"],[100,1,"<a href=\"Services\/ReviewService.php.html#54\">App\\Services\\ReviewService::deleteReview<\/a>"],[100,1,"<a href=\"Services\/ReviewService.php.html#67\">App\\Services\\ReviewService::toggleLike<\/a>"],[100,1,"<a href=\"Enums\/ReadingPlanStatus.php.html#19\">App\\Enums\\ReadingPlanStatus::label<\/a>"],[80,1,"<a href=\"Enums\/ReadingPlanStatus.php.html#31\">App\\Enums\\ReadingPlanStatus::badgeClass<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

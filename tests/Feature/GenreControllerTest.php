@@ -13,8 +13,6 @@ class GenreControllerTest extends TestCase
 
     /**
      * 一覧画面、作成画面、編集画面にアクセスした場合ステータス200が返るか検証
-     *
-     * @return void
      */
     public function test_画面表示が正常に行われること(): void
     {
@@ -28,10 +26,8 @@ class GenreControllerTest extends TestCase
 
     /**
      * 新規作成、更新、削除の各リクエストを送信した場合、DB.genres_tableのデータが正常に更新され、一覧画面へリダイレクトされるか検証
-     *
-     * @return void
      */
-    public function test_CRUD処理が市場に行われること(): void
+    public function test_cru_d処理が市場に行われること(): void
     {
         $this->withoutExceptionHandling();
         $user = User::factory()->create();

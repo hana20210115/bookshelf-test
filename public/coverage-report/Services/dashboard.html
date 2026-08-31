@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/app/Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/app</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Services</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="NotificationService.php.html#8">App\Services\NotificationService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenreService.php.html#9">App\Services\GenreService</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ReviewService.php.html#9">App\Services\ReviewService</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="BookApiService.php.html#9">App\Services\BookApiService</a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="BookService.php.html#10">App\Services\BookService</a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BookService.php.html#10">App\Services\BookService</a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="GenreService.php.html#9">App\Services\GenreService</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="BookApiService.php.html#9">App\Services\BookApiService</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReviewService.php.html#9">App\Services\ReviewService</a></td><td class="text-right">5</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="GenreService.php.html#25"><abbr title="App\Services\GenreService::getPaginatedBooksGenre">getPaginatedBooksGenre</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NotificationService.php.html#16"><abbr title="App\Services\NotificationService::getUserNotifications">getUserNotifications</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NotificationService.php.html#29"><abbr title="App\Services\NotificationService::markAsRead">markAsRead</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookApiService.php.html#17"><abbr title="App\Services\BookApiService::getList">getList</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="BookService.php.html#18"><abbr title="App\Services\BookService::getBookList">getBookList</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="GenreService.php.html#57"><abbr title="App\Services\GenreService::deleteGenre">deleteGenre</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ReadingPlanService.php.html#20"><abbr title="App\Services\ReadingPlanService::getReadingPlans">getReadingPlans</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ReviewService.php.html#18"><abbr title="App\Services\ReviewService::storeReview">storeReview</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ReportService.php.html#69"><abbr title="App\Services\ReportService::getTopGenres">getTopGenres</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="ReportService.php.html#109"><abbr title="App\Services\ReportService::getRatingDistribution">getRatingDistribution</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BookService.php.html#18"><abbr title="App\Services\BookService::getBookList">getBookList</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="ReportService.php.html#69"><abbr title="App\Services\ReportService::getTopGenres">getTopGenres</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="BookApiService.php.html#17"><abbr title="App\Services\BookApiService::getList">getList</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="GenreService.php.html#57"><abbr title="App\Services\GenreService::deleteGenre">deleteGenre</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="ReadingPlanService.php.html#20"><abbr title="App\Services\ReadingPlanService::getReadingPlans">getReadingPlans</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="ReviewService.php.html#18"><abbr title="App\Services\ReviewService::storeReview">storeReview</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="ReportService.php.html#109"><abbr title="App\Services\ReportService::getRatingDistribution">getRatingDistribution</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.5.8</a> and <a href="https://phpunit.de/">PHPUnit 10.5.64</a> at Mon Aug 31 13:36:13 JST 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,0,1,3,2,3], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([3,0,0,0,0,0,0,2,3,2,1,25], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[86.66666666666667,6,"<a href=\"BookApiService.php.html#9\">App\\Services\\BookApiService<\/a>"],[88.31168831168831,17,"<a href=\"BookService.php.html#10\">App\\Services\\BookService<\/a>"],[100,3,"<a href=\"DailyBatchService.php.html#10\">App\\Services\\DailyBatchService<\/a>"],[100,2,"<a href=\"FavoriteService.php.html#9\">App\\Services\\FavoriteService<\/a>"],[75,6,"<a href=\"GenreService.php.html#9\">App\\Services\\GenreService<\/a>"],[0,2,"<a href=\"NotificationService.php.html#8\">App\\Services\\NotificationService<\/a>"],[100,1,"<a href=\"RankingService.php.html#8\">App\\Services\\RankingService<\/a>"],[95.45454545454545,8,"<a href=\"ReadingPlanService.php.html#11\">App\\Services\\ReadingPlanService<\/a>"],[90.1639344262295,11,"<a href=\"ReportService.php.html#11\">App\\Services\\ReportService<\/a>"],[81.25,5,"<a href=\"ReviewService.php.html#9\">App\\Services\\ReviewService<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[60,2,"<a href=\"BookApiService.php.html#17\">App\\Services\\BookApiService::getList<\/a>"],[100,2,"<a href=\"BookApiService.php.html#35\">App\\Services\\BookApiService::create<\/a>"],[100,2,"<a href=\"BookApiService.php.html#58\">App\\Services\\BookApiService::update<\/a>"],[68.18181818181817,5,"<a href=\"BookService.php.html#18\">App\\Services\\BookService::getBookList<\/a>"],[100,1,"<a href=\"BookService.php.html#67\">App\\Services\\BookService::getBookDetails<\/a>"],[100,1,"<a href=\"BookService.php.html#86\">App\\Services\\BookService::storeBook<\/a>"],[100,1,"<a href=\"BookService.php.html#112\">App\\Services\\BookService::getEditDate<\/a>"],[100,2,"<a href=\"BookService.php.html#127\">App\\Services\\BookService::updateBook<\/a>"],[94.28571428571428,7,"<a href=\"BookService.php.html#146\">App\\Services\\BookService::getBookInfoByIsbn<\/a>"],[100,1,"<a href=\"DailyBatchService.php.html#17\">App\\Services\\DailyBatchService::executeDailyBatch<\/a>"],[100,1,"<a href=\"DailyBatchService.php.html#28\">App\\Services\\DailyBatchService::processOverduePlans<\/a>"],[100,1,"<a href=\"DailyBatchService.php.html#42\">App\\Services\\DailyBatchService::createReminderNotifications<\/a>"],[100,1,"<a href=\"FavoriteService.php.html#17\">App\\Services\\FavoriteService::toggleFavorite<\/a>"],[100,1,"<a href=\"FavoriteService.php.html#27\">App\\Services\\FavoriteService::getFavoriteBooks<\/a>"],[100,1,"<a href=\"GenreService.php.html#15\">App\\Services\\GenreService::getGenresWithBookCount<\/a>"],[0,1,"<a href=\"GenreService.php.html#25\">App\\Services\\GenreService::getPaginatedBooksGenre<\/a>"],[100,1,"<a href=\"GenreService.php.html#35\">App\\Services\\GenreService::storeGenre<\/a>"],[100,1,"<a href=\"GenreService.php.html#46\">App\\Services\\GenreService::updateGenre<\/a>"],[75,2,"<a href=\"GenreService.php.html#57\">App\\Services\\GenreService::deleteGenre<\/a>"],[0,1,"<a href=\"NotificationService.php.html#16\">App\\Services\\NotificationService::getUserNotifications<\/a>"],[0,1,"<a href=\"NotificationService.php.html#29\">App\\Services\\NotificationService::markAsRead<\/a>"],[100,1,"<a href=\"RankingService.php.html#14\">App\\Services\\RankingService::getTopRatedBooks<\/a>"],[75,2,"<a href=\"ReadingPlanService.php.html#20\">App\\Services\\ReadingPlanService::getReadingPlans<\/a>"],[100,1,"<a href=\"ReadingPlanService.php.html#36\">App\\Services\\ReadingPlanService::getAllBooks<\/a>"],[100,1,"<a href=\"ReadingPlanService.php.html#48\">App\\Services\\ReadingPlanService::createReadingPlan<\/a>"],[100,2,"<a href=\"ReadingPlanService.php.html#64\">App\\Services\\ReadingPlanService::updateReadingPlan<\/a>"],[100,1,"<a href=\"ReadingPlanService.php.html#84\">App\\Services\\ReadingPlanService::deleteReadingPlan<\/a>"],[100,1,"<a href=\"ReadingPlanService.php.html#95\">App\\Services\\ReadingPlanService::completeReadingPlan<\/a>"],[100,2,"<a href=\"ReportService.php.html#18\">App\\Services\\ReportService::getSummary<\/a>"],[100,4,"<a href=\"ReportService.php.html#42\">App\\Services\\ReportService::getTopRatedBooks<\/a>"],[81.48148148148148,3,"<a href=\"ReportService.php.html#69\">App\\Services\\ReportService::getTopGenres<\/a>"],[87.5,2,"<a href=\"ReportService.php.html#109\">App\\Services\\ReportService::getRatingDistribution<\/a>"],[75,2,"<a href=\"ReviewService.php.html#18\">App\\Services\\ReviewService::storeReview<\/a>"],[100,1,"<a href=\"ReviewService.php.html#44\">App\\Services\\ReviewService::updateReview<\/a>"],[100,1,"<a href=\"ReviewService.php.html#54\">App\\Services\\ReviewService::deleteReview<\/a>"],[100,1,"<a href=\"ReviewService.php.html#67\">App\\Services\\ReviewService::toggleLike<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

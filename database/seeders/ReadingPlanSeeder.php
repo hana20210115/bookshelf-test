@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-
-use Illuminate\Database\Seeder;
+use App\Enum\ReadingPlanStatus;
 use App\Models\ReadingPlan;
 use App\Models\User;
-use App\Enum\ReadingPlanStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 /**
  * 読書計画のテストデータを投入するシーダークラス
@@ -16,7 +15,6 @@ class ReadingPlanSeeder extends Seeder
 {
     /**
      * データベースへデータを投入する
-     * @return void
      */
     public function run(): void
     {
@@ -24,14 +22,14 @@ class ReadingPlanSeeder extends Seeder
         $mainUser = User::find(1);
         $otherUser = User::find(2);
 
-        //一応ユーザーが存在しない場合はスキップするようにしておきます
-        if (!$mainUser){
+        // 一応ユーザーが存在しない場合はスキップするようにしておきます
+        if (! $mainUser) {
             return;
         }
 
-        //ユーザー１のダミーデータ(主要テスト)
+        // ユーザー１のダミーデータ(主要テスト)
 
-        //進行中：期日が7日後
+        // 進行中：期日が7日後
         ReadingPlan::create([
             'user_id' => $mainUser->id,
             'book_id' => 1,
@@ -39,7 +37,7 @@ class ReadingPlanSeeder extends Seeder
             'status' => ReadingPlanStatus::IN_PROGRESS,
         ]);
 
-        //進行中:期日が明日＝通知機能のテスト対象のデータ
+        // 進行中:期日が明日＝通知機能のテスト対象のデータ
         ReadingPlan::create([
             'user_id' => $mainUser->id,
             'book_id' => 2,
@@ -47,7 +45,7 @@ class ReadingPlanSeeder extends Seeder
             'status' => ReadingPlanStatus::IN_PROGRESS,
         ]);
 
-        //期限切れ：期日が３日前＝失効処理のテスト対象
+        // 期限切れ：期日が３日前＝失効処理のテスト対象
         ReadingPlan::create([
             'user_id' => $mainUser->id,
             'book_id' => 3,
@@ -55,7 +53,7 @@ class ReadingPlanSeeder extends Seeder
             'status' => ReadingPlanStatus::OVERDUE,
         ]);
 
-        //読了:期日が機能＝完了済みのため何のしない
+        // 読了:期日が機能＝完了済みのため何のしない
         ReadingPlan::create([
             'user_id' => $mainUser->id,
             'book_id' => 4,
@@ -63,8 +61,8 @@ class ReadingPlanSeeder extends Seeder
             'status' => ReadingPlanStatus::COMPLETED,
         ]);
 
-        //ユーザー２（認可、他人のデータが見えないかテスト）
-        if($otherUser) {
+        // ユーザー２（認可、他人のデータが見えないかテスト）
+        if ($otherUser) {
             ReadingPlan::create([
                 'user_id' => $otherUser->id,
                 'book_id' => 1,
