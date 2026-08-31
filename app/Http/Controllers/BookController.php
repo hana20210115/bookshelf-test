@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Requests\Book\UpdateBookRequest;
+use App\Http\Requests\IsbnSearchRequest;
 use App\Models\Book;
 use App\Models\Genre;
 use App\Services\BookService;
-use App\Http\Requests\IsbnSearchRequest;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -37,12 +36,12 @@ class BookController extends Controller
     {
         $params = $request->only(['keyword', 'genre', 'sort']);
 
-        //画面のドロップダウン用にすべてのジャンルを取得
+        // 画面のドロップダウン用にすべてのジャンルを取得
         $genres = Genre::all();
 
         $books = $this->bookService->getBookList($params);
 
-        return view('books.index', compact('books', 'params','genres'));
+        return view('books.index', compact('books', 'params', 'genres'));
     }
 
     /**
@@ -126,9 +125,6 @@ class BookController extends Controller
 
     /**
      * ISBN検索（非同期処理通信API）
-     *
-     * @param IsbnSearchRequest $request
-     * @return JsonResponse
      */
     public function searchByIsbn(IsbnSearchRequest $request): JsonResponse
     {
@@ -136,7 +132,7 @@ class BookController extends Controller
 
         $result = $this->bookService->getBookInfoByIsbn($isbn);
 
-        if (!$result['is_success']) {
+        if (! $result['is_success']) {
             return response()->json(
                 ['error' => $result['message']],
                 $result['status']

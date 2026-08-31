@@ -10,7 +10,6 @@ class GenreService
 {
     /**
      * 書籍数付きの全ジャンルの取得
-     * @return Collection
      */
     public function getGenresWithBookCount(): Collection
     {
@@ -19,8 +18,6 @@ class GenreService
 
     /**
      * 特定のジャンルに紐づく書籍をページネーションで取得
-     * @param Genre $genre
-     * @return LengthAwarePaginator
      */
     public function getPaginatedBooksGenre(Genre $genre): LengthAwarePaginator
     {
@@ -29,8 +26,6 @@ class GenreService
 
     /**
      * ジャンルを新規登録
-     * @param array $validatedData
-     * @return Genre
      */
     public function storeGenre(array $validatedData): Genre
     {
@@ -39,9 +34,6 @@ class GenreService
 
     /**
      * ジャンルを更新
-     * @param Genre $genre
-     * @param array $validatedData
-     * @return bool
      */
     public function updateGenre(Genre $genre, array $validatedData): bool
     {
@@ -51,8 +43,6 @@ class GenreService
     /**
      * ジャンルを削除
      * ※紐づくジャンルがあれば削除対象外にする
-     * @param Genre $genre
-     * @return bool
      */
     public function deleteGenre(Genre $genre): bool
     {   // Genreクラスが入ったオブジェクトを、モデルに定義したリレーションでbookモデルを見に行って、bookモデルに紐づいているgenreかを確認している、紐づいていればfalse

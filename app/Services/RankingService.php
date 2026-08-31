@@ -9,7 +9,6 @@ class RankingService
 {
     /**
      * レビュー平均評価TOP10の書籍を取得する
-     * @return Collection
      */
     public function getTopRatedBooks(): Collection
     {

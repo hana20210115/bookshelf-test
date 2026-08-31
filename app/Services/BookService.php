@@ -13,47 +13,43 @@ class BookService
      * 検索・ソート条件に応じた書籍一覧をページネーションで取得する
      *
      * @param  array  $params  リクエストパラメーター(keyword,genre,sort)
-     * @return LengthAwarePaginator
      */
     public function getBookList(array $params = []): LengthAwarePaginator
     {
         // ジャンル情報と、レビューの星の平均を一緒に持ってくる
         $query = Book::with('genres')->withAvg('reviews', 'rating');
 
-        
-        //検索機能（本タイトルか著者）
+        // 検索機能（本タイトルか著者）
         // functionの入れ子になっているのは、AND（タイトル　OR 著者）の形をを作り、他の検索条件（ジャンル）などを汚さないようにしている
 
-        $query->when($params['keyword'] ?? null,function ($q,$keyword){
-            $q->where(function ($subQuery) use ($keyword){
-                $subQuery->where('title','like',"%{$keyword}%")->orWhere('author','like',"%{$keyword}%");
+        $query->when($params['keyword'] ?? null, function ($q, $keyword) {
+            $q->where(function ($subQuery) use ($keyword) {
+                $subQuery->where('title', 'like', "%{$keyword}%")->orWhere('author', 'like', "%{$keyword}%");
             });
         });
-        
 
         // ジャンルの絞り込み機能
         // 上記同様の理由で入れ子になっている
         // whereHasメソッドは自分が持っているモデルクラスじゃなく別テーブルを見に行ってくれるメソッド
-        
-        $query->when($params['genre'] ?? null, function ($q,$genre){
-            $q->whereHas('genres',function($subQuery) use ($genre){
-                $subQuery->where('genre_id',$genre);
+
+        $query->when($params['genre'] ?? null, function ($q, $genre) {
+            $q->whereHas('genres', function ($subQuery) use ($genre) {
+                $subQuery->where('genre_id', $genre);
             });
         });
 
-
         // 並び替え機能
 
-        $sort = $params['sort'] ?? 'latest'; //デフォルトはlatest(最新順)
-        if($sort === 'newest') {
+        $sort = $params['sort'] ?? 'latest'; // デフォルトはlatest(最新順)
+        if ($sort === 'newest') {
             $query->latest();
-        }elseif ($sort === 'oldest'){
+        } elseif ($sort === 'oldest') {
             $query->oldest();
-        }elseif ($sort === 'title'){
-            $query->orderBy('title','asc');
-        }elseif ($sort === 'rating'){
+        } elseif ($sort === 'title') {
+            $query->orderBy('title', 'asc');
+        } elseif ($sort === 'rating') {
             $query->orderByRaw('reviews_avg_rating IS NULL ASC')
-            ->orderBy('reviews_avg_rating','desc');
+                ->orderBy('reviews_avg_rating', 'desc');
         }
 
         return $query->paginate(10)->withQueryString();
@@ -61,8 +57,6 @@ class BookService
 
     /**
      * 書籍詳細画面に必要なデータをロードして返す
-     * @param Book $book
-     * @return Book
      */
     public function getBookDetails(Book $book): Book
     {
@@ -71,17 +65,13 @@ class BookService
             'reviews.user',
         ]);
 
-
         return $book;
     }
 
     /**
      * 書籍の新規登録
      *
-     * @param array $validateDate
-     * @param int $userId
-     * @return Book
-     *
+     * @param  array  $validateDate
      */
     public function storeBook(array $validatedData, int $userId): Book
     {
@@ -106,8 +96,6 @@ class BookService
 
     /**
      * 編集画面に必要なデータを取得する
-     * @param Book $book
-     * @return array
      */
     public function getEditDate(Book $book): array
     {
@@ -120,9 +108,6 @@ class BookService
 
     /**
      * 書籍の更新処理
-     * @param Book $book
-     * @param array $data
-     * @return Book
      */
     public function updateBook(Book $book, array $data): Book
     {   // booksテーブルを更新
@@ -139,15 +124,10 @@ class BookService
 
     /**
      * ISBNから書籍情報を取得する(Google Books API)
-     * 
-     * @param string $isbn
-     * @return array
      */
     public function getBookInfoByIsbn(string $isbn): array
-    {   
-        
+    {
 
-        
         $apiKey = config('services.google_books.api_key');
 
         $response = Http::get('https://www.googleapis.com/books/v1/volumes', [
@@ -155,11 +135,9 @@ class BookService
             'key' => $apiKey,
         ]);
 
-
         if ($response->failed()) {
             $status = $response->status();
             $message = '書籍情報の取得に失敗しました。';
-
 
             if ($status === 429) {
                 $message = 'アクセスが集中しています。しばらく経ってから再度お試しください。';
@@ -170,7 +148,7 @@ class BookService
             return [
                 'is_success' => false,
                 'status' => $status, // 422ならそのまま422を返す！
-                'message' => $message
+                'message' => $message,
             ];
         }
 
@@ -178,10 +156,9 @@ class BookService
             return [
                 'is_success' => false,
                 'status' => 404,
-                'message' => '書籍情報が見つかりませんでした。'
+                'message' => '書籍情報が見つかりませんでした。',
             ];
         }
-
 
         $bookData = $response->json('items')[0]['volumeInfo'];
 
@@ -194,7 +171,7 @@ class BookService
                 'published_date' => $bookData['publishedDate'] ?? '',
                 'description' => $bookData['description'] ?? '',
                 'image_url' => $bookData['imageLinks']['thumbnail'] ?? '',
-            ]
+            ],
         ];
     }
 }

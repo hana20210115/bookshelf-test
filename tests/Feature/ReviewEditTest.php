@@ -14,8 +14,6 @@ class ReviewEditTest extends TestCase
 
     /**
      * 編集画面にアクセスした場合、ステータス200が返るか検証
-     *
-     * @return void
      */
     public function test_編集画面の表示が正常に行われること(): void
     {
@@ -31,8 +29,6 @@ class ReviewEditTest extends TestCase
 
     /**
      * 更新および削除の各リクエストを送信した場合、DBが正常に処理され、適切な画面へリダイレクトされるか検証
-     *
-     * @return void
      */
     public function test_更新と削除処理が正常に行われること(): void
     {
@@ -47,8 +43,7 @@ class ReviewEditTest extends TestCase
 
         $previousUrl = route('books.show', $book);
 
-
-        //更新
+        // 更新
 
         $this->actingAs($user)
             ->from($previousUrl)
@@ -58,13 +53,11 @@ class ReviewEditTest extends TestCase
             ])
             ->assertRedirect($previousUrl);
 
-
         $this->assertDatabaseHas('reviews', [
             'id' => $review->id,
             'rating' => 5,
             'comment' => '更新されたコメント',
         ]);
-
 
         // 削除
 
@@ -72,7 +65,6 @@ class ReviewEditTest extends TestCase
             ->from($previousUrl)
             ->delete(route('reviews.destroy', $review))
             ->assertRedirect($previousUrl);
-
 
         $this->assertDatabaseMissing('reviews', [
             'id' => $review->id,

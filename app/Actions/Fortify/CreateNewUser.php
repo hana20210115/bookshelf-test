@@ -41,8 +41,6 @@ class CreateNewUser implements CreatesNewUsers
             'password.confirmed' => 'パスワードと一致しません',
         ])->validate();
 
-        
-
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Services\ReportService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ReportController extends Controller
@@ -15,8 +15,6 @@ class ReportController extends Controller
 
     /**
      * コンストラクタ
-     * 
-     * @param ReportService $reportService
      */
     public function __construct(ReportService $reportService)
     {
@@ -25,14 +23,11 @@ class ReportController extends Controller
 
     /**
      * マイ読書レポート画面を表示する
-     * 
-     * @return View
      */
     public function index(): View
     {
         $userId = Auth::id();
 
-        
         $summary = $this->reportService->getSummary($userId);
         $topRatedBooks = $this->reportService->getTopRatedBooks($userId);
         $topGenres = $this->reportService->getTopGenres($userId);
@@ -48,7 +43,6 @@ class ReportController extends Controller
             'top_rated_books' => $topRatedBooks,
             'genre_ratings' => $topGenres,
         ];
-
 
         return view('reports.index', compact('stats'));
     }

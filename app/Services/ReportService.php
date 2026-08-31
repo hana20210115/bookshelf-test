@@ -2,18 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\Review;
-use App\Models\ReadingPlan;
 use App\Enums\ReadingPlanStatus;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use App\Models\ReadingPlan;
+use App\Models\Review;
 use Illuminate\Support\Collection as SupportCollection;
 
 class ReportService
 {
     /**
      * 基本サマリー（総レビュー数、平均評価点、読了冊数）を取得
-     * @param int $userId
-     * @return array
      */
     public function getSummary(int $userId): array
     {
@@ -27,17 +24,13 @@ class ReportService
 
         return [
             'total_reviews' => $totalReviews,
-            'average_rating' => $averageRating ? round((float)$averageRating, 1) : 0.0,
+            'average_rating' => $averageRating ? round((float) $averageRating, 1) : 0.0,
             'completed_books_count' => $completedBooksCount,
         ];
     }
 
     /**
      * 高評価書籍TOP５を取得する
-     * 
-     * @param int $userId
-     * @param int $limit
-     * @return array
      */
     public function getTopRatedBooks(int $userId, int $limit = 5): array
     {
@@ -61,10 +54,6 @@ class ReportService
 
     /**
      * ジャンル別評価傾向TOP５を取得する（平均評価の降順）
-     * 
-     * @param int $userId
-     * @param int $limit
-     * @return SupportCollection
      */
     public function getTopGenres(int $userId, int $limit = 5): SupportCollection
     {
@@ -74,7 +63,7 @@ class ReportService
             ->flatMap(function ($review) {
                 $genres = $review->book?->genres;
 
-                if (!$genres || $genres->isEmpty()) {
+                if (! $genres || $genres->isEmpty()) {
                     return collect([[
                         'id' => 0,
                         'name' => '未分類',
@@ -82,14 +71,14 @@ class ReportService
                     ]]);
                 }
 
-                return $genres->map(fn($genre) => [
+                return $genres->map(fn ($genre) => [
                     'id' => $genre->id,
                     'name' => $genre->name,
                     'rating' => $review->rating,
                 ]);
             })
             ->groupBy('id')
-            ->map(fn($group) => [
+            ->map(fn ($group) => [
                 'id' => $group->first()['id'],
                 'name' => $group->first()['name'],
                 'average_rating' => round((float) $group->avg('rating'), 1),
@@ -102,9 +91,6 @@ class ReportService
 
     /**
      * 評価分布（星1〜5の件数）を取得する
-     * 
-     * @param int $userId
-     * @return SupportCollection
      */
     public function getRatingDistribution(int $userId): SupportCollection
     {

@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Services;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Http;
 use App\Services\BookService;
-use App\Models\Book;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
 class BookServiceTest extends TestCase
 {
@@ -14,17 +13,16 @@ class BookServiceTest extends TestCase
 
     private BookService $bookService;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->bookService = new BookService();
+        $this->bookService = new BookService;
     }
 
     /**
      * 正常時200のステータスで意図した構造の配列データが変えるか検証
-     * @return void
      */
-    public function test_正常時200に意図した構造の配列のデータが返ること():void
+    public function test_正常時200に意図した構造の配列のデータが返ること(): void
     {
         Http::fake([
             'www.googleapis.com/*' => Http::response([
@@ -32,17 +30,17 @@ class BookServiceTest extends TestCase
                 'items' => [
                     [
                         'volumeInfo' => [
-                                'title' => 'モック書籍タイトル',
-                                'authors' => ['モック 太郎', 'モック 次郎'],
-                                'publishedDate' => '2026-08-26',
-                                'description' => 'モック用の説明文です。',
-                                'imageLinks' => [
-                                    'thumbnail' => 'http://example.com/test.jpg'
-                                ]
-                            ]
-                    ]
-                ]
-            ],200)
+                            'title' => 'モック書籍タイトル',
+                            'authors' => ['モック 太郎', 'モック 次郎'],
+                            'publishedDate' => '2026-08-26',
+                            'description' => 'モック用の説明文です。',
+                            'imageLinks' => [
+                                'thumbnail' => 'http://example.com/test.jpg',
+                            ],
+                        ],
+                    ],
+                ],
+            ], 200),
         ]);
 
         $result = $this->bookService->getBookInfoByIsbn('9781234567890');
@@ -55,17 +53,16 @@ class BookServiceTest extends TestCase
         $this->assertEquals('モック 太郎, モック 次郎', $result['data']['author']);
         $this->assertEquals('http://example.com/test.jpg', $result['data']['image_url']);
     }
-    
+
     /**
      * 該当なしステータスが404の時、意図したメッセージが返るか検証
-     * @return void
      */
-    public function test_該当なしステータス404の時に意図したメッセージが返るか():void
+    public function test_該当なしステータス404の時に意図したメッセージが返るか(): void
     {
         Http::fake([
             'www.googleapis.com/*' => Http::response([
-                'totalItems' => 0
-            ],200)
+                'totalItems' => 0,
+            ], 200),
         ]);
 
         $result = $this->bookService->getBookInfoByIsbn('9780000000000');
@@ -77,12 +74,11 @@ class BookServiceTest extends TestCase
 
     /**
      * 通信制限時ステータス429のときに意図したメッセージが返るか検証
-     * @return void
      */
     public function test_通信制限時_429_のときに意図したステータスとメッセージが返ること(): void
     {
         Http::fake([
-            'www.googleapis.com/*' => Http::response([], 429)
+            'www.googleapis.com/*' => Http::response([], 429),
         ]);
 
         $result = $this->bookService->getBookInfoByIsbn('9781234567890');

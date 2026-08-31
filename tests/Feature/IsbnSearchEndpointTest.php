@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
 use App\models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
 class IsbnSearchEndpointTest extends TestCase
 {
@@ -14,9 +14,8 @@ class IsbnSearchEndpointTest extends TestCase
 
     /**
      * 正しいISBNを送信した場合JSON形式で書籍情報が返るか検証
-     * @return void
      */
-    public function test_正しいISBNを送信した場合JSON形式で書籍情報が返るか():void
+    public function test_正しい_isb_nを送信した場合_jso_n形式で書籍情報が返るか(): void
     {
         $user = User::factory()->create();
 
@@ -28,10 +27,10 @@ class IsbnSearchEndpointTest extends TestCase
                         'volumeInfo' => [
                             'title' => 'テストAPI書籍',
                             'authors' => ['テスト著者'],
-                        ]
-                    ]
-                ]
-            ], 200)
+                        ],
+                    ],
+                ],
+            ], 200),
         ]);
 
         $response = $this->actingAs($user)->getJson('/books/isbn/9781234567890');
@@ -42,9 +41,8 @@ class IsbnSearchEndpointTest extends TestCase
 
     /**
      * 不正なisbnが送信された場合Serviceを呼ばずに422エラーが返るか検証
-     * @return void
      */
-    public function test_不正なISBNが送信された場合Serviceを呼ばずに422エラーが返ること():void
+    public function test_不正な_isb_nが送信された場合_serviceを呼ばずに422エラーが返ること(): void
     {
         $user = User::factory()->create();
 

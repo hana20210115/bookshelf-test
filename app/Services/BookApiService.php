@@ -10,9 +10,6 @@ class BookApiService
 {
     /**
      * 一覧取得
-     * @param $request
-     * @return LengthAwarePaginator
-     * 
      */
     public function getList($request): LengthAwarePaginator
     {
@@ -28,15 +25,11 @@ class BookApiService
 
     /**
      * 新規登録
-     *
-     * @param  array $data
-     * @return Book
      */
     public function create(array $data): Book
     {
         // $dataの配列の中からgenresキーを取り除く（元のデータはそのまま）
         $bookData = Arr::except($data, ['genres']);
-
 
         // 書籍を保存
         $book = Book::create($bookData);
@@ -51,9 +44,6 @@ class BookApiService
 
     /**
      * 更新
-     * @param Book $book
-     * @param array $data
-     * @return Book
      */
     public function update(Book $book, array $data): Book
     {
