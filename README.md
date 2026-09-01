@@ -17,8 +17,6 @@ Traditional Web（Blade + セッション認証）のアーキテクチャをベ
 - Webアプリケーション: http://localhost
 - phpMyAdmin: http://localhost:8080
 
-
-
 ---
 
 ## ER図
@@ -152,32 +150,31 @@ erDiagram
 
 以下の手順に従って、採点用・開発用のローカル環境を構築してください。本プロジェクトは `Laravel 10.x` を明示的に指定して構築しています。
 
-### 1. Laravelプロジェクトの作成
-以下のDockerコマンドを実行し、プロジェクトを作成します（`curl -s "https://laravel.build/..."` は使用しません）。
-
+### 1. リポジトリのクローンと移動
 ```bash
-# Laravel 10.x を明示的に指定してプロジェクトを作成（以下の1行をコピーして実行してください）
-docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest composer create-project laravel/laravel:^10.0 bookshelf-app
+# プロジェクトをクローンし、ディレクトリに移動します
+git clone https://github.com/hana20210115/bookshelf-test.git bookshelf-app
+cd bookshelf-app
 ```
 
 ### 2. Laravel Sailのインストール
-次に、以下のコマンドを **1つずつ順番に** コピーして実行してください。
-
+次に、以下のコマンドを1つずつコピーして実行してください。
 ```bash
-# 1. 作成したプロジェクトのディレクトリに移動
-cd bookshelf-app
-
-# 2. Laravel Sail（開発環境構築ツール）をインストール
+# 1. Laravel Sail（開発環境構築ツール）をインストール
 docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest composer require laravel/sail --dev
 
-# 3. Sailの初期設定を実行し、データベースにMySQLを選択（
+# 2. Sailの設定ファイルをパブリッシュ（MySQLを選択）
 docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest php artisan sail:install --with=mysql
 ```
 **※M1/M2/M3 Macをお使いの方へ**
 `sail up -d` 実行時に `no matching manifest for linux/arm64/v8` エラーが発生した場合、`compose.yaml` の `mysql` サービスに `platform: 'linux/amd64'` を追加してください。
 
-### 3. 環境変数の設定と phpMyAdmin の追加
-`.env` ファイルを開き、データベース接続情報が以下と一致していることを確認します。
+### 3. 環境変数の設定 (.env の作成)
+```bash
+# 環境変数のベースファイルをコピーして .env を作成します
+cp .env.example .env
+```
+作成された `.env` ファイルを開き、データベース接続情報を Laravel Sail 環境に合わせて以下のように**書き換えて**ください。
 ```env
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -186,59 +183,36 @@ DB_DATABASE=laravel
 DB_USERNAME=sail
 DB_PASSWORD=password
 ```
-続いて `compose.yaml` を開き、`mysql` サービスの直後に以下を追加します。
-```yaml
-    phpmyadmin:
-        image: 'phpmyadmin:latest'
-        ports:
-            - '${FORWARD_PHPMYADMIN_PORT:-8080}:80'
-        environment:
-            PMA_HOST: mysql
-            PMA_USER: '${DB_USERNAME}'
-            PMA_PASSWORD: '${DB_PASSWORD}'
-        networks:
-            - sail
-        depends_on:
-            - mysql
-```
+※ `compose.yaml` の設定（phpMyAdmin等の追加記述）は既に構築済みの状態でコミットされているため、ファイルの編集は不要です。
 
 ### 4. コンテナの起動とエイリアス設定
+各コマンドを1行ずつ順番に実行してください。
+
 ```bash
+# 1. コンテナをバックグラウンドで起動
 ./vendor/bin/sail up -d
+
+# 2. エイリアス（ショートカット）を設定
 echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+# ※ Windows (WSL) 環境の場合は代わりに以下を実行してください
+# echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+
+# 3. シェル設定の反映
 exec $SHELL
 ```
 
-### 5. フロントエンドのセットアップ
-Tailwind CSSおよび必要なプラグインをインストールします。
-```bash
-sail npm install
-sail npm install alpinejs
-sail npm install -D tailwindcss@^3.4.0 @tailwindcss/forms postcss autoprefixer
-sail npx tailwindcss init -p
-```
-生成された `tailwind.config.js` を以下の内容で上書きします。
-```javascript
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
+### 5. パッケージのインストール
+本プロジェクトに必要な依存パッケージ（Tailwind CSS, Alpine.js等のフロントエンド環境を含む）および設定ファイルは、すべてリポジトリにコミット済みです。
+以下のコマンドを実行して、パッケージを一括インストールしてください。
 
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-    ],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
-        },
-    },
-    plugins: [forms],
-};
+```bash
+# 1. PHPの依存パッケージをインストール
+sail composer install
+
+# 2. フロントエンドのパッケージをインストール
+sail npm install
 ```
+※ `tailwind.config.js` 等の生成や上書き作業は不要です。
 
 ### 6. Google Books API キーの取得・設定
 書籍の自動検索機能を使用するため、Google Books APIキーを設定します。
@@ -254,17 +228,18 @@ GOOGLE_BOOKS_API_KEY=取得したAPIキーをここに貼り付け
 ```
 
 ### 7. アプリケーションの初期化とサーバー起動
-以下のコマンドでアプリケーションキーの生成、テストデータの流し込み、フロントエンドのビルドを行います。
+以下のコマンドでアプリケーションキーの生成、テストデータの流し込み、およびフロントエンドのビルドを行います。
 ```bash
 sail artisan key:generate
 sail artisan migrate --seed
-sail npm run dev
+sail npm run build
 ```
 
 **※ テストデータ（Seeder）の工夫について**
-上記の `sail artisan migrate --seed` コマンドにより、採点時の動作確認がスムーズに行えるようテストデータが自動生成されます。
-- 書籍・レビュー：複数ユーザーに紐づく書籍データと、1〜5段階の評価が網羅されたレビューデータをランダムに生成しています。
-- 読書計画：`Carbon::today()` を起点とした相対日付を用い、「進行中」「期限切れ（昨日以前）」「通知対象（明日）」のシナリオデータが常に再現されるよう調整済みです。
+上記の `sail artisan migrate --seed` コマンドにより、採点時の動作確認がスムーズに行えるよう、実務を想定したダミーデータが自動生成されます。
+- **BookSeeder**: マイ読書レポートで複数ユーザーの所有書籍が確認できるよう、登録者をランダムユーザーに割り当てています。
+- **ReviewSeeder**: 評価分布グラフが意味のある分布になるよう1〜5段階を網羅し、汎用的な日本語テンプレートコメントを設定。各書籍に2〜4件のレビューをランダムユーザーで生成します。
+- **ReadingPlanSeeder**: 読書計画の各種挙動（発火する/しないパターン）を網羅的に確認できるよう、`Carbon::today()` を起点とした相対日付（`in_progress`、`completed`、`overdue`）でレコードを作成。採点日が変わっても同じシナリオが再現されます。また、認可判定テスト用に複数ユーザーへ分散させつつ、主要な確認シナリオはメインテストユーザーに集約させています。
 
 **※ 認証機能（Laravel Fortify）の設定について**
 本プロジェクトの認証機能（会員登録・ログイン等）は、ライブラリ `Laravel Fortify` を用いて実装しています。
@@ -289,9 +264,14 @@ sail npm run dev
 | **読書計画一覧** | http://localhost/reading-plans |
 | **通知一覧** | http://localhost/notifications |
 
+### 動作確認用テストアカウント（Seeder生成データ）
+マイグレーション（`--seed`）実行時に自動作成されるテスト用ユーザー情報を用いてログインできます。読書計画の通知や期限切れなどの主要なテストシナリオは、以下のメインテストユーザー（山田太郎）に集約されています。
+- **メールアドレス**: `yamada@example.com`
+- **パスワード**: `password`
+
 ---
 
-## テストの実行とカバレッジ確認
+## テストの実行とカバレッジ確認【採点者様へ】
 
 採点時の動作確認、コードカバレッジの計測、およびコード品質等の確認には、以下のコマンドを使用してください。
 
@@ -318,8 +298,7 @@ sail bin pint --test
 ```
 
 ### 4. 日次バッチ処理（スケジュールタスク）の手動実行
-読書計画の「期限切れ（overdue）」への自動ステータス更新、および「明日が期限」の書籍に対するリマインダー通知作成は、毎日 `00:00` に実行されるバッチ処理として実装しています。
-採点時の動作確認として処理を即時（手動）実行する場合は、以下のコマンドを使用してください。
+読書計画の自動更新機能の手動確認として、日次バッチ処理を即時実行する場合は以下のコマンドを使用してください。
 ```bash
 sail artisan batch:reading-plans
 ```
