@@ -157,19 +157,7 @@ git clone https://github.com/hana20210115/bookshelf-test.git bookshelf-app
 cd bookshelf-app
 ```
 
-### 2. Laravel Sailのインストール
-次に、以下のコマンドを1つずつコピーして実行してください。
-```bash
-# 1. Laravel Sail（開発環境構築ツール）をインストール
-docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest composer require laravel/sail --dev
-
-# 2. Sailの設定ファイルをパブリッシュ（MySQLを選択）
-docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest php artisan sail:install --with=mysql
-```
-**※M1/M2/M3 Macをお使いの方へ**
-`sail up -d` 実行時に `no matching manifest for linux/arm64/v8` エラーが発生した場合、`compose.yaml` の `mysql` サービスに `platform: 'linux/amd64'` を追加してください。
-
-### 3. 環境変数の設定 (.env の作成)
+### 2. 環境変数の設定 (.env の作成)
 ```bash
 # 環境変数のベースファイルをコピーして .env を作成します
 cp .env.example .env
@@ -184,6 +172,18 @@ DB_USERNAME=sail
 DB_PASSWORD=password
 ```
 ※ `compose.yaml` の設定（phpMyAdmin等の追加記述）は既に構築済みの状態でコミットされているため、ファイルの編集は不要です。
+
+### 3. Laravel Sailのインストール
+次に、以下のコマンドを1つずつコピーして実行してください。
+```bash
+# 1. Laravel Sail（開発環境構築ツール）をインストール
+docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest composer require laravel/sail --dev
+
+# 2. Sailの設定ファイルをパブリッシュ（MySQLを選択）
+docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html -e COMPOSER_CACHE_DIR=/tmp/composer_cache laravelsail/php82-composer:latest php artisan sail:install --with=mysql
+```
+**※M1/M2/M3 Macをお使いの方へ**
+`sail up -d` 実行時に `no matching manifest for linux/arm64/v8` エラーが発生した場合、`compose.yaml` の `mysql` サービスに `platform: 'linux/amd64'` を追加してください。
 
 ### 4. コンテナの起動とエイリアス設定
 各コマンドを1行ずつ順番に実行してください。
@@ -235,7 +235,7 @@ sail artisan migrate --seed
 sail npm run build
 ```
 
-**※ テストデータ（Seeder）の工夫について**
+**※ テストデータ（Seeder）について**
 上記の `sail artisan migrate --seed` コマンドにより、採点時の動作確認がスムーズに行えるよう、実務を想定したダミーデータが自動生成されます。
 - **BookSeeder**: マイ読書レポートで複数ユーザーの所有書籍が確認できるよう、登録者をランダムユーザーに割り当てています。
 - **ReviewSeeder**: 評価分布グラフが意味のある分布になるよう1〜5段階を網羅し、汎用的な日本語テンプレートコメントを設定。各書籍に2〜4件のレビューをランダムユーザーで生成します。
