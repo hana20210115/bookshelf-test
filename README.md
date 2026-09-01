@@ -302,4 +302,4 @@ sail bin pint --test
 ```bash
 sail artisan batch:reading-plans
 ```
-※ コマンド実行後、データベースの `reading_plans` テーブルのステータス更新、および `notifications` テーブルへの通知レコード作成をご確認いただけます。
+※ コマンド実行後、データベースの `notifications` テーブルへの通知レコード作成をご確認いただけます。
